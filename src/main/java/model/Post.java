@@ -1,32 +1,27 @@
 package model;
 
-import java.util.Date;
-
 public class Post {
-	
+
 	private int id;
-	private User user;
-	private Date date;
+	private String user;
 	private String contenido;
-	
-	
+
+	public Post( String user, String contenido) {
+		super();
+		this.user = user;
+		this.contenido = contenido;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	public String getContenido() {
 		return contenido;
@@ -34,7 +29,7 @@ public class Post {
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
-	
-	
+
+
 
 }

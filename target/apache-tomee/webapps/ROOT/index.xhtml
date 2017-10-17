@@ -20,7 +20,7 @@
 	<br></br>
 	<h:form>
 		<div>
-			<label>Usuario</label>
+			<label>Correo</label>
 			<h:inputText value="#{authMb.username}" />
 		</div>
 		<div>
@@ -28,11 +28,11 @@
 			<h:inputSecret value="#{authMb.password}" />
 		</div>
 		<h:commandLink action="#{authMb.loggin()}" >
-			Entrar
+			<button class="waves-effect waves-light btn">Ingresa</button>
 		</h:commandLink>
 		|
 		<h:commandLink action="#{authMb.register()}" >
-			Registrate
+			<button class="waves-effect waves-light btn">Registrate</button>
 		</h:commandLink>
 		
 		

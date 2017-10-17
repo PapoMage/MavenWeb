@@ -16,14 +16,14 @@ import view.AuthMb;
 
 @WebFilter(filterName="authFilter", urlPatterns="*.xhtml")
 public class AuthFilter implements Filter {
-	
+
 	@Inject
 	private AuthMb authMb;
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class AuthFilter implements Filter {
 		HttpServletRequest servReq = (HttpServletRequest)req;
 		servReq.getRequestURI();
 		chain.doFilter(req, resp);
-		
+
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

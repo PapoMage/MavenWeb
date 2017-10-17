@@ -8,40 +8,49 @@ import model.User;
 
 @Named
 public class RegisterDB {
-@Inject 
-private UserController userCntrl;
+	@Inject 
+	private UserController userCntrl;
 
-private String email;
-private String password;
+	private String email;
+	private String password;
+	private String name;
 
-public String register(){
-	User user = new User(email, password);
-	userCntrl.register(user);
-	return "index";
-}
+	public String getName() {
+		return name;
+	}
 
-public UserController getUserCntrl() {
-	return userCntrl;
-}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-public void setUserCntrl(UserController userCntrl) {
-	this.userCntrl = userCntrl;
-}
+	public String register(){
+		User user = new User(email, password,name);
+		userCntrl.register(user);
+		return "index";
+	}
 
-public String getPassword() {
-	return password;
-}
+	public UserController getUserCntrl() {
+		return userCntrl;
+	}
 
-public void setPassword(String password) {
-	this.password = password;
-}
+	public void setUserCntrl(UserController userCntrl) {
+		this.userCntrl = userCntrl;
+	}
 
-public String getEmail(){
-	return email;
-}
+	public String getPassword() {
+		return password;
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail(){
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

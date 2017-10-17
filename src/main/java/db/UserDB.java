@@ -9,16 +9,14 @@ import model.User;
 
 @Singleton
 public class UserDB {
-	
-	
+
 	public List<User> users = new ArrayList<User>();
 	private int id=0;
-	
+
 	public UserDB() {
-		users.add(new User("martinbobbio1@gmail.com","1234"));
-		users.add(new User("pablo.fernandez@davinci.edu.ar","1234"));
+		users.add(new User("admin@gmail.com","admin","Admin"));
 	}
-	
+
 	public int nextId() {
 		id++;
 		return id;
@@ -28,6 +26,8 @@ public class UserDB {
 		return users;
 	}
 
-	
-	
+
+
+
+
 }

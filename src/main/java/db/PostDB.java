@@ -5,18 +5,22 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
-import model.User;
+import model.Post;
+
 
 @Singleton
 public class PostDB {
 	
-	
-	public List<User> users = new ArrayList<User>();
+	public List<Post> posts = new ArrayList<Post>();
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	private int id=0;
 	
 	public PostDB() {
-		users.add(new User("martinbobbio1@gmail.com","1234"));
-		users.add(new User("pablo.fernandez@davinci.edu.ar","1234"));
+
+		posts.add(new Post("Admin","Esto tiene contenido"));
 	}
 	
 	public int nextId() {
@@ -24,8 +28,8 @@ public class PostDB {
 		return id;
 	}
 
-	public List<User> getUsers(){
-		return users;
+	public List<Post> getPosts(){
+		return posts;
 	}
 
 	

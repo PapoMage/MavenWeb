@@ -66,7 +66,7 @@ public class AuthMb implements Serializable {
 	public void setCurrentUser(boolean currentUser) {
 		this.currentUser = currentUser;
 	}
-	
+
 	public String register() {
 		return "register.xhtml";
 	}

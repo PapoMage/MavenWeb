@@ -13,13 +13,15 @@ import model.User;
 @Named
 @SessionScoped
 public class UserMb implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject UserController uc;
-	
+
+
 	public List<User> obtenerUsuarios(){
 		return uc.getUsers();
 	}
+
 
 }

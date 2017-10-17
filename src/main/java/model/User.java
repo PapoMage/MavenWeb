@@ -1,21 +1,19 @@
 package model;
 
 public class User {
-	
+
 	private int id;
 	private String email;
 	private String password;
-	private String firstname;
-	private String lastname;
-	private int age;
-	
-	public User(String email, String password) {
+	private String name;
+
+	public User(String email, String password, String name) {
 		super();
 		this.email = email;
 		this.password = password;
-		
+		this.name = name;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -34,32 +32,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFirstname() {
-		return firstname;
+	public String getName() {
+		return name;
 	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	
-	
-	
-	
-	
-	
 
-	
-	
+
+
+
+
+
+
+
+
+
 
 }
