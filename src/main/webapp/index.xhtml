@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+
+	<title>Red Social</title>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+
+</h:head>
+<h:body>
+
+	
+	<h1>Inicia Sesion</h1>
+	<br></br>
+	<h:form>
+		<div>
+			<label>Usuario</label>
+			<h:inputText value="#{authMb.username}" />
+		</div>
+		<div>
+			<label>Clave</label>
+			<h:inputSecret value="#{authMb.password}" />
+		</div>
+		<h:commandLink action="#{authMb.loggin()}" >
+			Entrar
+		</h:commandLink>
+		|
+		<h:commandLink action="#{authMb.register()}" >
+			Registrate
+		</h:commandLink>
+		
+		
+	</h:form>
+</h:body>
+</html>

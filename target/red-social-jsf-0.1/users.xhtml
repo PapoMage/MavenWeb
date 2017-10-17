@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+
+	<title>Red Social Maven - Inicio</title>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+
+
+</h:head>
+
+<h:body>
+
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#{authMb.logout()}">Salir</a></li>
+		<li class="divider"></li>
+		<li><a href="#!">Opciones</a></li>
+	</ul>
+	<nav class="blue darken-4">
+		<div class="nav-wrapper container">
+			<a href="#!" class="brand-logo hide-on-med-and-down">Blog - Maven</a>
+			<ul class="right">
+				<li><h:link value="Usuarios" outcome="users"></h:link></li>
+				<li><a href="badges.html">Posts</a></li>
+				<li><a class="dropdown-button" href="#!"
+					data-activates="dropdown1">Opciones<i
+						class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+
+	<div class="container">
+
+		<h2 class="blue-text text-darken-4">Lista de usuarios</h2>
+
+		<h:dataTable value="#{userMb.obtenerUsuarios()}" var="u"
+			styleClass="responsive-table">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+    					#{u.id}
+    				</h:column>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+    					#{u.email}
+    				</h:column>
+
+
+			</h:dataTable>
+
+	</div>
+
+</h:body>
+</html>
