@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 
 	<title>Red Social Maven - Inicio</title>
@@ -16,65 +17,73 @@
 
 <h:body>
 
-      <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#{authMb.logout()}">Salir</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">Opciones</a></li>
-      </ul>
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo hide-on-med-and-down">Blog - Maven</a>
-          <ul class="right">
-            <li>
-              <h:link value="Usuarios" outcome="users"></h:link>
-            </li>
-            <li><a href="posts.xhtml">Posts</a></li>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones<i class="material-icons right">arrow_drop_down</i></a></li>
-          </ul>
-        </div>
-      </nav>
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#{authMb.logout()}">Salir</a></li>
+  <li class="divider"></li>
+  <li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+</ul>
+<nav class="red darken-1">
+  <div class="nav-wrapper container">
+    <a href="home.xhtml" class="brand-logo hide-on-med-and-down">Blog - Maven</a>
+    <ul class="right">
+      <li><h:link value="Usuarios" outcome="users"></h:link></li>
+      <li><h:link value="Posts" outcome="posts"></h:link></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones
+        <i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
 
-      <h1>Bienvenido <h:outputText value="#{authMb.getUsername()}" /></h1>
+<div class="row" style="margin:0 auto;">
+  <div class="col s12 m8 l8 offset-m2 offset-l2">
+
+      <h3 class="red-text darken-1">Bienvenido <h:outputText value="#{authMb.user.name}" /></h3>
       <br></br>
-      
-        <div class="row">
-    <h:form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
+
+        <h:form>
+
+        <div class="input-field">
           <i class="material-icons prefix">mode_edit</i>
           <h:inputTextarea id="icon_prefix2" class="materialize-textarea" value="#{postMb.contenido}"></h:inputTextarea>
-          <label for="icon_prefix2">Redacta tu Post</label>
-        
-        
+          <label for="icon_prefix2">Inspirate</label>
           <h:commandLink action="#{postMb.crearPost()}" >
-			<button class="btn waves-effect waves-light" type="submit" name="action">Crear Post
-    <i class="material-icons right">send</i>
-  </button>
-		</h:commandLink>
+        		<button class="btn waves-effect red waves-light darken-1" type="submit" name="action">Crear Post
+              <i class="material-icons right">send</i>
+            </button>
+		      </h:commandLink>
         </div>
-      </div>
-    </h:form>
-  </div>
+
+      </h:form>
+
   <br></br>
   <br></br>
-  
-    <div class="col s12 m7">
-    <h2 class="header">Lista de Posts</h2>
-    <div class="card horizontal">
-      <div class="card-image">
-        <img src="https://lorempixel.com/100/190/nature/6"></img>
-      </div>
-      <div class="card-stacked">
-       <div class="card-action">
-          <a href="#">Admin</a>
+  <hr></hr>
+  <br></br>
+
+  <ui:repeat var="post" value="#{postMb.getPosts()}">
+    <div class="col s12 m6 l4">
+      <div class="card">
+        <div class="card-image">
+          <img src="http://lorempixel.com/400/200/sports"/>
+          <span class="card-title">#{post.user.name}</span>
         </div>
         <div class="card-content">
-          <p>Soy un Post de Prueba.</p>
+          <p>#{post.contenido}</p>
         </div>
-       
+        <div class="card-action">
+          <p href="#">#{post.date}</p>
+        </div>
       </div>
     </div>
+  </ui:repeat>
+
+
+
+
+
+
   </div>
+</div>
 
 </h:body>
 </html>

@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.swing.JOptionPane;
 
 import controller.UserController;
+import model.User;
 
 @Named
 @SessionScoped
@@ -21,17 +22,19 @@ public class AuthMb implements Serializable {
 	private String password;
 
 	private boolean currentUser;
+	private User user;
 
 	public boolean isLogged() {
-		return currentUser != false;
+		return user != null;
 	}
 
 	public String loggin() {
 		currentUser = userCntr.isValid(email, password);
+		user = userCntr.getUserAuth(email, password);
 		email = null;
 		password = null;
 		if (isLogged()) {
-			return "home";
+			return "home?faces-redirect=true";
 		} else {
 			JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
 			return null;
@@ -43,12 +46,12 @@ public class AuthMb implements Serializable {
 		return "index.xhtml";
 	}
 
-	public String getUsername() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setUsername(String username) {
-		this.email = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -57,6 +60,10 @@ public class AuthMb implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
 	public boolean isCurrentUser() {

@@ -19,7 +19,7 @@ public class UserMb implements Serializable {
 	@Inject UserController uc;
 
 
-	public List<User> obtenerUsuarios(){
+	public List<User> getUsers(){
 		return uc.getUsers();
 	}
 

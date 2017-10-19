@@ -15,27 +15,35 @@
 </h:head>
 <h:body>
 
-	
-	<h1>Inicia Sesion</h1>
-	<br></br>
-	<h:form>
-		<div>
-			<label>Usuario</label>
-			<h:inputText value="#{authMb.username}" />
-		</div>
-		<div>
-			<label>Clave</label>
-			<h:inputSecret value="#{authMb.password}" />
-		</div>
-		<h:commandLink action="#{authMb.loggin()}" >
-			Entrar
-		</h:commandLink>
-		|
-		<h:commandLink action="#{authMb.register()}" >
-			Registrate
-		</h:commandLink>
-		
-		
-	</h:form>
+
+<div class="row" style="margin:0 auto;">
+	<div class="col s12 m8 l4 offset-m2 offset-l4">
+
+		<h1 class="red-text text-darken-1">LOGIN</h1>
+		<br></br>
+
+		<h:form>
+			<div class="input-field">
+				<i class="material-icons prefix red-text">account_circle</i>
+				<h:inputText value="#{authMb.email}" />
+				<label for="icon_prefix">Email</label>
+			</div>
+			<div class="input-field">
+				<i class="material-icons prefix red-text">vpn_key</i>
+				<h:inputSecret value="#{authMb.password}" />
+				<label for="icon_prefix">Password</label>
+			</div>
+			<h:commandLink action="#{authMb.loggin()}" >
+				<button class="waves-effect darken-1 red waves-light btn">Ingresar</button>
+			</h:commandLink>
+			<h:commandLink action="#{authMb.register()}" >
+				<button class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
+			</h:commandLink>
+		</h:form>
+
+	</div>
+</div>
+
+
 </h:body>
 </html>

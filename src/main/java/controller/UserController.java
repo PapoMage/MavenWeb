@@ -23,6 +23,15 @@ public class UserController {
 		}
 		return false;
 	}
+	
+	public User getUserAuth(String email, String password){
+		for(User user : db.users){
+			if(user.getEmail().equals(email) && user.getPassword().equals(password)){
+				return user;		
+			}
+		}
+		return null;
+	}
 
 	public boolean usernameExist(String email){
 		for(User user : db.users){
@@ -35,7 +44,6 @@ public class UserController {
 
 	public void register(User user){
 		if(usernameExist(user.getEmail())){
-			//throw new RuntimeException("Usuario ya existe");
 			JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe, por favor ingrese uno distinto");
 		}else {
 		user.setId(db.nextId());

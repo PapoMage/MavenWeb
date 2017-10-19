@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import view.AuthMb;
 
@@ -29,10 +30,19 @@ public class AuthFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest servReq = (HttpServletRequest)req;
-		servReq.getRequestURI();
-		chain.doFilter(req, resp);
-
+		
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) resp;
+		
+		if((request.getRequestURI().equals("/home.xhtml") && !authMb.isLogged()) || 
+				(request.getRequestURI().equals("/posts.xhtml") && !authMb.isLogged()) ||
+				(request.getRequestURI().equals("/perfil.xhtml") && !authMb.isLogged()) ||
+				(request.getRequestURI().equals("/users.xhtml") && !authMb.isLogged())){
+				response.sendRedirect("index.xhtml");
+			}  else {
+				chain.doFilter(req, resp);
+			}
+		
 	}
 
 	@Override

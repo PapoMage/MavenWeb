@@ -10,6 +10,9 @@ import model.User;
 public class RegisterDB {
 	@Inject 
 	private UserController userCntrl;
+	
+	@Inject 
+	private UserDB userDb;
 
 	private String email;
 	private String password;
@@ -24,7 +27,7 @@ public class RegisterDB {
 	}
 
 	public String register(){
-		User user = new User(email, password,name);
+		User user = new User(userDb.nextId(),email,password,name);
 		userCntrl.register(user);
 		return "index";
 	}

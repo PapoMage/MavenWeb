@@ -1,8 +1,10 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import model.Post;
@@ -12,20 +14,13 @@ import model.Post;
 public class PostDB {
 	
 	public List<Post> posts = new ArrayList<Post>();
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-
-	private int id=0;
 	
 	public PostDB() {
-
-		posts.add(new Post("Admin","Esto tiene contenido"));
+		
 	}
 	
 	public int nextId() {
-		id++;
-		return id;
+		return posts.size()+1;
 	}
 
 	public List<Post> getPosts(){

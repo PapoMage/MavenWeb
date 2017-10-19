@@ -11,15 +11,14 @@ import model.User;
 public class UserDB {
 
 	public List<User> users = new ArrayList<User>();
-	private int id=0;
 
 	public UserDB() {
-		users.add(new User("admin@gmail.com","admin","Admin"));
+		users.add(new User(nextId(),"admin@gmail.com","admin","Admin"));
+		users.add(new User(nextId(),"martinbobbio1@gmail.com","1234","Martin"));
 	}
-
+	
 	public int nextId() {
-		id++;
-		return id;
+		return users.size()+1;
 	}
 
 	public List<User> getUsers(){

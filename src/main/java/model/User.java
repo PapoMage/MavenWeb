@@ -2,17 +2,18 @@ package model;
 
 public class User {
 
-	private int id;
+	private int id=0;
 	private String email;
 	private String password;
 	private String name;
 
-	public User(String email, String password, String name) {
-		super();
+	public User(int id,String email, String password, String name) {
+		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
 	}
+	
 
 	public int getId() {
 		return id;

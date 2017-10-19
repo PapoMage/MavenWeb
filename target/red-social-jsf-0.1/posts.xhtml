@@ -19,45 +19,49 @@
 
 <h:body>
 
-	<ul id="dropdown1" class="dropdown-content">
-		<li><a href="#{authMb.logout()}">Salir</a></li>
-		<li class="divider"></li>
-		<li><a href="#!">Opciones</a></li>
-	</ul>
-	<nav class="teal darken-4">
-		<div class="nav-wrapper container">
-			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Blog
-				- Maven</a>
-			<ul class="right">
-				<li><h:link value="Usuarios" outcome="users"></h:link></li>
-				<li><a href="#!">Posts</a></li>
-				<li><a class="dropdown-button" href="#!"
-					data-activates="dropdown1">Opciones<i
-						class="material-icons right">arrow_drop_down</i></a></li>
-			</ul>
-		</div>
-	</nav>
+<ul id="dropdown1" class="dropdown-content">
+	<li><a href="#{authMb.logout()}">Salir</a></li>
+	<li class="divider"></li>
+	<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+</ul>
+<nav class="red darken-1">
+	<div class="nav-wrapper container">
+		<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Blog - Maven</a>
+		<ul class="right">
+			<li><h:link value="Usuarios" outcome="users"></h:link></li>
+			<li><h:link value="Posts" outcome="posts"></h:link></li>
+			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones
+				<i class="material-icons right">arrow_drop_down</i></a></li>
+		</ul>
+	</div>
+</nav>
 
 	<div class="container">
 
-		<h2 class="blue-text text-darken-4">Lista de posts</h2>
+		<h2 class="red-text text-darken-1">Lista de posts</h2>
 
-		<h:dataTable value="#{postMb.obtenerPosts()}" var="p"
+		<h:dataTable value="#{postMb.getPosts()}" var="p"
 			styleClass="responsive-table">
 
 			<h:column>
 				<f:facet name="header">Id</f:facet>
     					#{p.id}
-    				</h:column>
+    	</h:column>
 
 			<h:column>
 				<f:facet name="header">Usuario</f:facet>
-    					#{p.user}
-    				</h:column>
+    					#{p.user.email}
+    	</h:column>
+
 			<h:column>
 				<f:facet name="header">Contenido</f:facet>
     					#{p.contenido}
-    				</h:column>
+    	</h:column>
+
+			<h:column>
+				<f:facet name="header">Fecha</f:facet>
+    					#{p.date}hs
+    	</h:column>
 
 		</h:dataTable>
 

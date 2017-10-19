@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 
-	<title>Red Social Maven - Inicio</title>
+	<title>Red Social Maven - Perfil</title>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
@@ -37,41 +37,20 @@
 <div class="row" style="margin:0 auto;">
   <div class="col s12 m8 l8 offset-m2 offset-l2">
 
-      <h3 class="red-text darken-1">Bienvenido <h:outputText value="#{authMb.user.name}" /></h3>
-      <br></br>
+  <h3 class="red-text darken-1">Perfil de <h:outputText value="#{authMb.user.name}" /></h3>
 
-        <h:form>
-
-        <div class="input-field">
-          <i class="material-icons prefix">mode_edit</i>
-          <h:inputTextarea id="icon_prefix2" class="materialize-textarea" value="#{postMb.contenido}"></h:inputTextarea>
-          <label for="icon_prefix2">Inspirate</label>
-          <h:commandLink action="#{postMb.crearPost()}" >
-        		<button class="btn waves-effect red waves-light darken-1" type="submit" name="action">Crear Post
-              <i class="material-icons right">send</i>
-            </button>
-		      </h:commandLink>
-        </div>
-
-      </h:form>
-
-  <br></br>
-  <br></br>
-  <hr></hr>
-  <br></br>
-
-  <ui:repeat var="post" value="#{postMb.getPosts()}">
+  <ui:repeat var="post" value="#{postMb.getMyPosts()}">
     <div class="col s12 m6 l4">
       <div class="card">
         <div class="card-image">
-          <img src="https://www.webnode.com/blog/wp-content/uploads/2016/10/Blog-intro.jpg"/>
+          <img src="http://lorempixel.com/400/200/sports"/>
           <span class="card-title">#{post.user.name}</span>
         </div>
         <div class="card-content">
           <p>#{post.contenido}</p>
         </div>
         <div class="card-action">
-          <p href="#">#{post.date}</p>
+          <p href="#">#{post.date}hs</p>
         </div>
       </div>
     </div>
