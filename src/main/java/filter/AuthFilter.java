@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import view.AuthMb;
 
-@WebFilter(filterName="authFilter", urlPatterns="*.xhtml")
+@WebFilter(filterName = "authFilter", urlPatterns = "*.xhtml")
 public class AuthFilter implements Filter {
 
 	@Inject
@@ -23,26 +23,26 @@ public class AuthFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated metho d stub
 
 	}
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		
-		if((request.getRequestURI().equals("/home.xhtml") && !authMb.isLogged()) || 
-				(request.getRequestURI().equals("/posts.xhtml") && !authMb.isLogged()) ||
-				(request.getRequestURI().equals("/perfil.xhtml") && !authMb.isLogged()) ||
-				(request.getRequestURI().equals("/users.xhtml") && !authMb.isLogged())){
-				response.sendRedirect("index.xhtml");
-			}  else {
-				chain.doFilter(req, resp);
-			}
-		
+
+		if ((request.getRequestURI().equals("/home.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/posts.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/perfil.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/users.xhtml") && !authMb.isLogged())) {
+			response.sendRedirect("index.xhtml");
+		} else {
+			chain.doFilter(req, resp);
+		}
+
 	}
 
 	@Override

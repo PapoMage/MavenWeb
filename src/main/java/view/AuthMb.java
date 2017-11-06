@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.swing.JOptionPane;
 
 import controller.UserController;
 import model.User;
@@ -18,6 +17,7 @@ public class AuthMb implements Serializable {
 
 	@Inject
 	private UserController userCntr;
+
 	private String email;
 	private String password;
 
@@ -36,7 +36,6 @@ public class AuthMb implements Serializable {
 		if (isLogged()) {
 			return "home?faces-redirect=true";
 		} else {
-			JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
 			return null;
 		}
 	}
@@ -61,7 +60,7 @@ public class AuthMb implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}

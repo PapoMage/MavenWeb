@@ -16,12 +16,11 @@ public class UserMb implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject UserController uc;
+	@Inject
+	UserController uc;
 
-
-	public List<User> getUsers(){
+	public List<User> getUsers() {
 		return uc.getUsers();
 	}
-
 
 }

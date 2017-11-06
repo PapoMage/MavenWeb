@@ -4,57 +4,83 @@ import model.User;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.swing.JOptionPane;
-
-import db.UserDB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 
 @Stateless
 public class UserController {
 
-	@Inject
-	private UserDB db;
+	@PersistenceContext
+	private EntityManager em;
 
-	public boolean isValid(String email, String password){
-		for(User user : db.users){
-			if(user.getEmail().equals(email) && user.getPassword().equals(password)){
-				return true;		
+	public boolean isValid(String email, String password) {
+
+		String hql = "Select u from User u where u.email = :email AND u.password = :password";
+		TypedQuery<User> q = em.createQuery(hql, User.class);
+		q.setParameter("email", email);
+		q.setParameter("password", password);
+
+		try {
+			if (q.getSingleResult().getEmail().equals(email) && q.getSingleResult().getPassword().equals(password)) {
+				return true;
 			}
+		} catch (Exception e) {
+			// TODO: Imprimir alerta en html
 		}
+
 		return false;
+
 	}
-	
-	public User getUserAuth(String email, String password){
-		for(User user : db.users){
-			if(user.getEmail().equals(email) && user.getPassword().equals(password)){
-				return user;		
+
+	public User getUserAuth(String email, String password) {
+
+		String hql = "Select u from User u where u.email = :email AND u.password = :password";
+		TypedQuery<User> q = em.createQuery(hql, User.class);
+		q.setParameter("email", email);
+		q.setParameter("password", password);
+
+		try {
+			if (q.getSingleResult().getEmail().equals(email) && q.getSingleResult().getPassword().equals(password)) {
+				return q.getSingleResult();
 			}
+		} catch (Exception e) {
+			// TODO: Imprimir alerta en html
 		}
+
 		return null;
 	}
 
-	public boolean usernameExist(String email){
-		for(User user : db.users){
-			if(user.getEmail().equals(email) ){
-				return true;		
+	public boolean usernameExist(String email) {
+
+		String hql = "Select u from User u where u.email = :email";
+		TypedQuery<User> q = em.createQuery(hql, User.class);
+		q.setParameter("email", email);
+
+		try {
+			if (q.getSingleResult().getEmail().equals(email)) {
+				return true;
 			}
+		} catch (Exception e) {
+			// TODO: Imprimir alerta en html
 		}
+
 		return false;
 	}
 
-	public void register(User user){
-		if(usernameExist(user.getEmail())){
-			JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe, por favor ingrese uno distinto");
-		}else {
-		user.setId(db.nextId());
-		db.users.add(user);
-		}
+	public User byId(int id) {
+		return em.find(User.class, id);
 	}
 
-	public List<User> getUsers(){
-		return db.getUsers();
+	public void register(User user) {
+		em.persist(user);
 	}
 
-
+	public List<User> getUsers() {
+		CriteriaQuery<User> cq = em.getCriteriaBuilder().createQuery(User.class);
+		cq.select(cq.from(User.class));
+		return em.createQuery(cq).getResultList();
+	}
 
 }

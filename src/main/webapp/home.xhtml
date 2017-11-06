@@ -1,89 +1,152 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 
-	<title>Red Social Maven - Inicio</title>
+	<title>Tech Blog - Inicio</title>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+
+	<style>
+.modal {
+	height: 35%;
+}
+
+#logo {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+</style>
 
 
 </h:head>
 
 <h:body>
 
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#{authMb.logout()}">Salir</a></li>
-  <li class="divider"></li>
-  <li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
-</ul>
-<nav class="red darken-1">
-  <div class="nav-wrapper container">
-    <a href="home.xhtml" class="brand-logo hide-on-med-and-down">Blog - Maven</a>
-    <ul class="right">
-      <li><h:link value="Usuarios" outcome="users"></h:link></li>
-      <li><h:link value="Posts" outcome="posts"></h:link></li>
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones
-        <i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#{authMb.logout()}">Salir</a></li>
+		<li class="divider"></li>
+		<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+	</ul>
+	<nav class="red darken-1">
+		<div class="nav-wrapper container">
+			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
+			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
+				Blog - Home</a>
+			<ul class="right">
+				<li><h:link rendered="#{authMb.user.is_admin == 1}"
+						value="Usuarios" outcome="users"></h:link></li>
+				<li><h:link rendered="#{authMb.user.is_admin == 1}"
+						value="Posts" outcome="posts"></h:link></li>
+				<li><a class="dropdown-button" href="#!"
+					data-activates="dropdown1">Opciones <i
+						class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</div>
+	</nav>
 
-<div class="row" style="margin:0 auto;">
-  <div class="col s12 m8 l8 offset-m2 offset-l2">
+	<div class="row" style="margin: 0 auto;">
+		<div class="col s12 m8 l8 offset-m2 offset-l2">
 
-      <h3 class="red-text darken-1">Bienvenido <h:outputText value="#{authMb.user.name}" /></h3>
-      <br></br>
+			<h3 class="red-text darken-1">
+				Bienvenido
+				<h:outputText value="#{authMb.user.name}" />
+			</h3>
+			<br></br>
 
-        <h:form>
+			<h:form>
 
-        <div class="input-field">
-          <i class="material-icons prefix">mode_edit</i>
-          <h:inputTextarea id="icon_prefix2" class="materialize-textarea" value="#{postMb.contenido}"></h:inputTextarea>
-          <label for="icon_prefix2">Inspirate</label>
-          <h:commandLink action="#{postMb.crearPost()}" >
-        		<button class="btn waves-effect red waves-light darken-1" type="submit" name="action">Crear Post
-              <i class="material-icons right">send</i>
-            </button>
-		      </h:commandLink>
-        </div>
+				<div class="input-field">
+					<i class="material-icons prefix">mode_edit</i>
+					<h:inputTextarea id="icon_prefix2" class="materialize-textarea"
+						value="#{postMb.contenido}"></h:inputTextarea>
+					<label for="icon_prefix2">Inspirate</label>
+					<h:commandLink action="#{postMb.crearPost()}">
+						<button class="btn waves-effect red waves-light darken-1"
+							type="submit" name="action">
+							Crear Post <i class="material-icons right">send</i>
+						</button>
+					</h:commandLink>
+				</div>
 
-      </h:form>
+			</h:form>
 
-  <br></br>
-  <br></br>
-  <hr></hr>
-  <br></br>
+			<br></br> <br></br>
+			<hr></hr>
+			<br></br>
 
-  <ui:repeat var="post" value="#{postMb.getPosts()}">
-    <div class="col s12 m6 l4">
-      <div class="card">
-        <div class="card-image">
-          <img src="http://lorempixel.com/400/200/sports"/>
-          <span class="card-title">#{post.user.name}</span>
-        </div>
-        <div class="card-content">
-          <p>#{post.contenido}</p>
-        </div>
-        <div class="card-action">
-          <p href="#">#{post.date}</p>
-        </div>
-      </div>
-    </div>
-  </ui:repeat>
+			<ui:repeat var="post" value="#{postMb.getPosts()}">
+				<div class="col s12 m6">
+
+					<div class="card">
+						<div class="card-image">
+							<img src="https://placeimg.com/400/200/tech" /> <span
+								class="card-title">#{post.user.name}</span> <a
+								href="#modal#{post.id}" onclick="openModal(#{post.id})"
+								class="btn-floating halfway-fab waves-effect waves-light red">
+								<i class="large material-icons">comment</i>
+							</a>
+						</div>
+						<div class="card-content">
+							<p>#{post.contenido}</p>
+						</div>
+						<div class="card-action">
+							<p href="#">#{post.date}</p>
+						</div>
+					</div>
+
+					<div id="modal#{post.id}" class="modal">
+						<div class="modal-content">
+							<p>
+								#{post.user.name} dice: <span class="red-text">"#{post.contenido}"</span>
+							</p>
+							<div class="input-field col s12">
+								<h:inputTextarea id="icon_prefix1" class="materialize-textarea"
+									value="#{postMb.contenido}"></h:inputTextarea>
+								<label for="icon_prefix1">Comentar</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#!" onclick="openModal(#{post.id})"
+								class="modal-action modal-close waves-effect red-text waves-red btn-flat">
+								Cancelar </a> <a href="#!"
+								class="modal-action modal-close waves-effect green-text waves-green btn-flat">
+								Confirmar </a>
+						</div>
+					</div>
+					<script>
+      $(document).ready(function(){
+        $('.modal').modal();
+      });
+
+      function openModal(id) {
+        $('#modal'+id).modal('open');
+      }
+      function close(id) {
+        $('#modal'+id).modal('close');
+      }
+      </script>
+
+
+				</div>
+			</ui:repeat>
 
 
 
 
 
 
-  </div>
-</div>
+		</div>
+	</div>
 
 </h:body>
 </html>

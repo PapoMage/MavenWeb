@@ -3,47 +3,51 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 
-	<title>Red Social</title>
+	<title>Tech Blog</title>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
 
 
 </h:head>
 <h:body>
 
 
-<div class="row" style="margin:0 auto;">
-	<div class="col s12 m8 l4 offset-m2 offset-l4">
+	<div class="row" style="margin: 0 auto;">
+		<div class="col s12 m8 l4 offset-m2 offset-l4">
 
-		<h1 class="red-text text-darken-1">REGISTRO</h1>
-		<br></br>
+			<h1 class="red-text text-darken-1">REGISTRATE A TECH BLOG</h1>
+			<br></br>
 
-		<h:form>
-			<div class="input-field">
-				<i class="material-icons prefix red-text">face</i>
-				<h:inputText value="#{registerMb.name}" />
-				<label for="icon_prefix">Nombre</label>
-			</div>
-			<div class="input-field">
-				<i class="material-icons prefix red-text">account_circle</i>
-				<h:inputText value="#{registerMb.email}" />
-				<label for="icon_prefix">Email</label>
-			</div>
-			<div class="input-field">
-				<i class="material-icons prefix red-text">vpn_key</i>
-				<h:inputSecret value="#{registerMb.password}" />
-				<label for="icon_prefix">Password</label>
-			</div>
-			<h:commandLink action="#{registerMb.register()}" >
-				<button class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
-			</h:commandLink>
-		</h:form>
+			<h:form>
+				<div class="input-field">
+					<i class="material-icons prefix red-text">face</i>
+					<h:inputText value="#{registerMb.name}" />
+					<label for="icon_prefix">Nombre</label>
+				</div>
+				<div class="input-field">
+					<i class="material-icons prefix red-text">account_circle</i>
+					<h:inputText value="#{registerMb.email}" />
+					<label for="icon_prefix">Email</label>
+				</div>
+				<div class="input-field">
+					<i class="material-icons prefix red-text">vpn_key</i>
+					<h:inputSecret value="#{registerMb.password}" />
+					<label for="icon_prefix">Password</label>
+				</div>
+				<h:commandLink action="#{registerMb.register()}">
+					<button
+						class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
+				</h:commandLink>
+			</h:form>
 
+		</div>
 	</div>
-</div>
 
 
 </h:body>

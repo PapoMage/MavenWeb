@@ -1,12 +1,9 @@
 filter\AuthFilter.class
 controller\PostController.class
 view\RegisterMb.class
-db\PostDB.class
 controller\UserController.class
 view\AuthMb.class
 view\PostMb.class
 view\UserMb.class
-db\RegisterDB.class
 model\User.class
-db\UserDB.class
 model\Post.class
