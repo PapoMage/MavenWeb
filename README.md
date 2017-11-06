@@ -16,11 +16,11 @@ Inicio:
 
 Lista de Usuarios:
 
-![Image of inicio](src/main/images/Captura2.JPG)
+![Image of inicio](src/main/webapp/images/Captura2.JPG)
 
 Comentarios:
 
-![Image of inicio](src/main/images/Captura3.JPG)
+![Image of inicio](src/main/webapp/images/Captura3.JPG)
 
 
 
