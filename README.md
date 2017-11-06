@@ -36,5 +36,5 @@ En SQL ingresar lo siguiente:
 
 CREATE DATABASE blog_maven;
 GRANT USAGE ON *.* TO mbobbio@localhost IDENTIFIED BY '1234';
-GRANT ALL PRIVILEGES ON blog_maven TO mbobbio@localhost;
+GRANT ALL PRIVILEGES ON blog_maven.* TO mbobbio@localhost;
 USE blog_maven;
