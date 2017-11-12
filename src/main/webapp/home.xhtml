@@ -7,6 +7,8 @@
 
 	<title>Tech Blog - Inicio</title>
 
+	<link rel="icon" href="images/logo.png" />
+
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
@@ -70,11 +72,12 @@
 					<h:inputTextarea id="icon_prefix2" class="materialize-textarea"
 						value="#{postMb.contenido}"></h:inputTextarea>
 					<label for="icon_prefix2">Inspirate</label>
-					<h:commandLink action="#{postMb.crearPost()}">
-						<button class="btn waves-effect red waves-light darken-1"
-							type="submit" name="action">
-							Crear Post <i class="material-icons right">send</i>
-						</button>
+
+
+					<h:commandLink styleClass="btn btn-primary"
+						action="#{postMb.crearPost()}">
+			    	Crear Post <i class="material-icons right">send</i>
+						<f:ajax render="@form :listPost" execute="@form"></f:ajax>
 					</h:commandLink>
 				</div>
 
@@ -84,46 +87,67 @@
 			<hr></hr>
 			<br></br>
 
-			<ui:repeat var="post" value="#{postMb.getPosts()}">
-				<div class="col s12 m6">
+			<h:panelGroup layout="block" id="listPost">
+				<ui:repeat var="post" value="#{postMb.getPosts()}">
+					<div class="col s12 m12">
 
-					<div class="card">
-						<div class="card-image">
-							<img src="https://placeimg.com/400/200/tech" /> <span
-								class="card-title">#{post.user.name}</span> <a
-								href="#modal#{post.id}" onclick="openModal(#{post.id})"
-								class="btn-floating halfway-fab waves-effect waves-light red">
-								<i class="large material-icons">comment</i>
-							</a>
-						</div>
-						<div class="card-content">
-							<p>#{post.contenido}</p>
-						</div>
-						<div class="card-action">
-							<p href="#">#{post.date}</p>
-						</div>
-					</div>
+						<div class="card">
+							<div class="card-image">
+								<img src="https://placeimg.com/400/200/tech" /> <span
+									style="font-weight: bold" class="card-title white-text">#{post.user.name}
+									(#{post.date})</span><a href="#modal#{post.id}"
+									onclick="openModal(#{post.id})"
+									class="btn-floating halfway-fab waves-effect waves-light red">
+									<i class="large material-icons">comment</i>
+								</a>
+							</div>
+							<div class="card-content">
+								<p>#{post.contenido}</p>
+							</div>
+							<div class="card-action">
+								<label for="icon_prefix2">Comentarios: </label>
+								<ui:repeat var="comment" value="#{commentMb.listByPost(post)}">
+									<div class="row">
+										<div class="col s12 m10">
+											<div class="card-panel teal">
+												<span class="white-text"><p>
+														<strong>#{comment.user.name}: </strong>#{comment.content}
+													</p>
+													<i class="material-icons left">date_range</i>#{comment.date}
+												</span>
+											</div>
+										</div>
+									</div>
 
-					<div id="modal#{post.id}" class="modal">
-						<div class="modal-content">
-							<p>
-								#{post.user.name} dice: <span class="red-text">"#{post.contenido}"</span>
-							</p>
-							<div class="input-field col s12">
-								<h:inputTextarea id="icon_prefix1" class="materialize-textarea"
-									value="#{postMb.contenido}"></h:inputTextarea>
-								<label for="icon_prefix1">Comentar</label>
+								</ui:repeat>
 							</div>
 						</div>
-						<div class="modal-footer">
-							<a href="#!" onclick="openModal(#{post.id})"
-								class="modal-action modal-close waves-effect red-text waves-red btn-flat">
-								Cancelar </a> <a href="#!"
-								class="modal-action modal-close waves-effect green-text waves-green btn-flat">
-								Confirmar </a>
+
+						<div id="modal#{post.id}" class="modal">
+							<h:form>
+								<div class="modal-content">
+									<p>
+										#{post.user.name} dice: <span class="red-text">"#{post.contenido}"</span>
+									</p>
+									<div class="input-field col s12">
+										<h:inputTextarea id="icon_prefix1"
+											class="materialize-textarea" value="#{commentMb.content}"></h:inputTextarea>
+										<label for="icon_prefix1">Comentar</label>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<a href="#!" onclick="openModal(#{post.id})"
+										class="modal-action modal-close waves-effect red-text waves-red btn-flat">
+										Cancelar </a>
+									<h:commandLink action="#{commentMb.createComment(post)}">
+										<button
+											class="modal-action modal-close waves-effect cyan-text waves-cyan btn-flat"
+											type="submit">Confirmar</button>
+									</h:commandLink>
+								</div>
+							</h:form>
 						</div>
-					</div>
-					<script>
+						<script>
       $(document).ready(function(){
         $('.modal').modal();
       });
@@ -137,8 +161,10 @@
       </script>
 
 
-				</div>
-			</ui:repeat>
+					</div>
+				</ui:repeat>
+
+			</h:panelGroup>
 
 
 

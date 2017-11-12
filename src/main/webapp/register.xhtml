@@ -5,6 +5,8 @@
 
 	<title>Tech Blog</title>
 
+	<link rel="icon" href="images/logo.png" />
+
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
@@ -12,42 +14,60 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 
 </h:head>
 <h:body>
 
 
+
 	<div class="row" style="margin: 0 auto;">
 		<div class="col s12 m8 l4 offset-m2 offset-l4">
 
-			<h1 class="red-text text-darken-1">REGISTRATE A TECH BLOG</h1>
+			<h1 class="red-text text-darken-1">TECH BLOG</h1>
 			<br></br>
+
+			<div id="alerts">
+				<h:messages styleClass="card red white-text"
+					style="padding:5px;display:none" />
+			</div>
 
 			<h:form>
 				<div class="input-field">
 					<i class="material-icons prefix red-text">face</i>
-					<h:inputText value="#{registerMb.name}" />
+					<h:inputText id="name" value="#{registerMb.name}" />
 					<label for="icon_prefix">Nombre</label>
 				</div>
 				<div class="input-field">
 					<i class="material-icons prefix red-text">account_circle</i>
-					<h:inputText value="#{registerMb.email}" />
+					<h:inputText id="email" value="#{registerMb.email}" />
 					<label for="icon_prefix">Email</label>
+
 				</div>
 				<div class="input-field">
 					<i class="material-icons prefix red-text">vpn_key</i>
-					<h:inputSecret value="#{registerMb.password}" />
+					<h:inputSecret id="password" value="#{registerMb.password}" />
 					<label for="icon_prefix">Password</label>
+
 				</div>
-				<h:commandLink action="#{registerMb.register()}">
-					<button
-						class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
-				</h:commandLink>
+				<div class="align-center">
+					<h:commandLink action="#{registerMb.register()}">
+						<button
+							class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
+					</h:commandLink>
+				</div>
 			</h:form>
 
 		</div>
 	</div>
+
+	<script>
+		if ($('#alerts ul').length) {
+			swal("Error en el registro", $('#alerts ul li').text(), "error");
+		}
+	</script>
 
 
 </h:body>

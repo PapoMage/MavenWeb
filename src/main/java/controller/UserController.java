@@ -4,6 +4,8 @@ import model.User;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -27,7 +29,8 @@ public class UserController {
 				return true;
 			}
 		} catch (Exception e) {
-			// TODO: Imprimir alerta en html
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario o contrasenia invalidos",null);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 
 		return false;
