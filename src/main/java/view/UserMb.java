@@ -22,5 +22,10 @@ public class UserMb implements Serializable {
 	public List<User> getUsers() {
 		return uc.getUsers();
 	}
+	
+	public void deleteUser(User user) {
+		
+		uc.removeUser(user);
+	}
 
 }

@@ -29,7 +29,7 @@ public class Comment {
 	private User user;
 	
 	@NotNull
-	@Size(min=2, max=255)
+	@Size(max=255)
 	private String content;
 	
 	@NotNull
@@ -69,7 +69,7 @@ public class Comment {
 	}
 
 	public String getDate() {
-		return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(date);
+		return new SimpleDateFormat("HH:mm - dd/MM/yyyy").format(date);
 	}
 
 	public void setDate(Date date) {

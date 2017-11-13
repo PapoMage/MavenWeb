@@ -13,37 +13,41 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet" />
-		
+
 	<style>
-		#logo{
-   		width: 60px;
-    	height:60px;
-   		margin-right: 20px;
-    	}
-	</style>
+#logo {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+</style>
 
 
 </h:head>
 
 <h:body>
 
-<ul id="dropdown1" class="dropdown-content">
-	<li><a href="#{authMb.logout()}">Salir</a></li>
-	<li class="divider"></li>
-	<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
-</ul>
-<nav class="red darken-1">
-	<div class="nav-wrapper container">
-	<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
-		<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech Blog - Usuarios</a>
-		<ul class="right">
-			<li><h:link rendered="#{authMb.user.is_admin == 1}" value="Usuarios" outcome="users"></h:link></li>
-      <li><h:link rendered="#{authMb.user.is_admin == 1}" value="Posts" outcome="posts"></h:link></li>
-			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones
-				<i class="material-icons right">arrow_drop_down</i></a></li>
-		</ul>
-	</div>
-</nav>
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#{authMb.logout()}">Salir</a></li>
+		<li class="divider"></li>
+		<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+	</ul>
+	<nav class="red darken-1">
+		<div class="nav-wrapper container">
+			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
+			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
+				Blog - Usuarios</a>
+			<ul class="right">
+				<li><h:link rendered="#{authMb.user.is_admin == 1}"
+						value="Usuarios" outcome="users"></h:link></li>
+				<li><h:link rendered="#{authMb.user.is_admin == 1}"
+						value="Posts" outcome="posts"></h:link></li>
+				<li><a class="dropdown-button" href="#!"
+					data-activates="dropdown1">Opciones <i
+						class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</div>
+	</nav>
 
 
 
@@ -57,23 +61,23 @@
 				<f:facet name="header">Id</f:facet>
     					#{u.id}
     	</h:column>
-    	<h:column>
-					<f:facet name="header">Email</f:facet>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
     					#{u.email}
     	</h:column>
-    	<h:column>
-					<f:facet name="header">Nombre</f:facet>
+			<h:column>
+				<f:facet name="header">Nombre</f:facet>
     					#{u.name}
     	</h:column>
 			<h:column>
-					<f:facet name="header">Admin</f:facet>
-    					<h:outputLabel rendered="#{u.is_admin == 1}">
-								<i class="material-icons green-text">check</i>
-							</h:outputLabel>
-							<h:outputLabel rendered="#{u.is_admin == 0}">
-								<i class="material-icons red-text">clear</i>
-							</h:outputLabel>
-    	</h:column>
+				<f:facet name="header">Admin</f:facet>
+				<h:outputLabel rendered="#{u.is_admin == 1}">
+					<i class="material-icons green-text">check</i>
+				</h:outputLabel>
+				<h:outputLabel rendered="#{u.is_admin == 0}">
+					<i class="material-icons red-text">clear</i>
+				</h:outputLabel>
+			</h:column>
 
 		</h:dataTable>
 

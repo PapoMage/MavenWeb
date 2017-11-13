@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
 
 import model.Post;
 import model.User;
@@ -18,14 +17,14 @@ public class PostController {
 	private EntityManager em;
 
 	public List<Post> getPosts() {
-		CriteriaQuery<Post> cq = em.getCriteriaBuilder().createQuery(Post.class);
-		cq.select(cq.from(Post.class));
-		return em.createQuery(cq).getResultList();
+		String hql = "Select p from Post p order by p.date desc";
+		TypedQuery<Post> q = em.createQuery(hql, Post.class);
+		return q.getResultList();
 	}
 
 	public List<Post> getPostsByUser(User user) {
 
-		String hql = "Select p from Post p where p.user_id = :user_id";
+		String hql = "Select p from Post p where p.user_id = :user_id order by p.date desc";
 		TypedQuery<Post> q = em.createQuery(hql, Post.class);
 		q.setParameter("user_id", user.getId());
 
@@ -34,5 +33,9 @@ public class PostController {
 
 	public void addPost(Post post) {
 		em.persist(post);
+	}
+	
+	public void removePost(Post post) {
+		em.remove(em.find(Post.class, post.getId()));
 	}
 }

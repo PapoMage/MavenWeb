@@ -5,6 +5,8 @@
 <h:head>
 
 	<title>Tech Blog - Posts</title>
+	
+	<link rel="icon" href="images/logo.png"/>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet"
@@ -13,38 +15,42 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet" />
- 
-	<style> 
-		#logo{
-   		width: 60px;
-    	height:60px;
-   		margin-right: 20px;
-    	}
-	</style>
 
- 
+	<style>
+#logo {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+</style>
+
+
 
 </h:head>
 
 <h:body>
 
-<ul id="dropdown1" class="dropdown-content">
-	<li><a href="#{authMb.logout()}">Salir</a></li>
-	<li class="divider"></li>
-	<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
-</ul>
-<nav class="red darken-1">
-	<div class="nav-wrapper container">
-	<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
-		<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech Blog - Blogs</a>
-		<ul class="right">
-			<li><h:link rendered="#{authMb.user.is_admin == 1}" value="Usuarios" outcome="users"></h:link></li>
-      <li><h:link rendered="#{authMb.user.is_admin == 1}" value="Posts" outcome="posts"></h:link></li>
-			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones
-				<i class="material-icons right">arrow_drop_down</i></a></li>
-		</ul>
-	</div>
-</nav>
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#{authMb.logout()}">Salir</a></li>
+		<li class="divider"></li>
+		<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+	</ul>
+	<nav class="red darken-1">
+		<div class="nav-wrapper container">
+			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
+			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
+				Blog - Blogs</a>
+			<ul class="right">
+				<li><h:link rendered="#{authMb.user.is_admin == 1}"
+						value="Usuarios" outcome="users"></h:link></li>
+				<li><h:link rendered="#{authMb.user.is_admin == 1}"
+						value="Posts" outcome="posts"></h:link></li>
+				<li><a class="dropdown-button" href="#!"
+					data-activates="dropdown1">Opciones <i
+						class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</div>
+	</nav>
 
 	<div class="container">
 

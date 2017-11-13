@@ -29,7 +29,7 @@ public class UserController {
 				return true;
 			}
 		} catch (Exception e) {
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario o contrasenia invalidos",null);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario o contraseña invalidos",null);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 
@@ -84,6 +84,10 @@ public class UserController {
 		CriteriaQuery<User> cq = em.getCriteriaBuilder().createQuery(User.class);
 		cq.select(cq.from(User.class));
 		return em.createQuery(cq).getResultList();
+	}
+	
+	public void removeUser(User user) {
+		em.remove(em.find(User.class, user.getId()));
 	}
 
 }

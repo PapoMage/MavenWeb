@@ -32,7 +32,7 @@ public class PostMb implements Serializable {
 		return pc.getPostsByUser(authMb.getUser());
 	}
 
-	public String crearPost() {
+	public void crearPost() {
 		if (contenido != "") {
 			Post post = new Post();
 
@@ -45,7 +45,10 @@ public class PostMb implements Serializable {
 
 			contenido = null;
 		}
-		return "home?faces-redirect=true";
+	}
+	
+	public void deletePost(Post post) {
+		pc.removePost(post);
 	}
 
 	public String getContenido() {

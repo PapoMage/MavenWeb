@@ -29,15 +29,17 @@ public class AuthMb implements Serializable {
 	}
 
 	public String loggin() {
+	
 		currentUser = userCntr.isValid(email, password);
 		user = userCntr.getUserAuth(email, password);
 		email = null;
 		password = null;
+		
 		if (isLogged()) {
 			return "home?faces-redirect=true";
 		} else {
 			return null;
-		}
+		}		
 	}
 
 	public String logout() {

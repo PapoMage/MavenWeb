@@ -1,137 +1,228 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 
 	<title>Tech Blog - Inicio</title>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+	<link rel="icon" href="images/logo.png" />
 
-  <style>
-    .modal{
-      height: 35%;
-    }
-    #logo{
-    width: 60px;
-    height:60px;
-    margin-right: 20px;
-    }
-  </style>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<style>
+.modal {
+	height: 35%;
+}
+
+#logo {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+.title-post{
+	font-size:21px;
+}
+.card-image-position{
+	position:relative;
+}
+.card-buttons-position{
+	position: absolute;
+	bottom: -5%;
+	left:73%;
+}
+</style>
 
 
 </h:head>
 
 <h:body>
 
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#{authMb.logout()}">Salir</a></li>
-  <li class="divider"></li>
-  <li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
-</ul>
-<nav class="red darken-1">
-  <div class="nav-wrapper container">
-  <img class="circle responsive-img" src="images/logo.png" id="logo"></img>
-    <a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech Blog - Home</a>
-    <ul class="right">
-      <li><h:link rendered="#{authMb.user.is_admin == 1}" value="Usuarios" outcome="users"></h:link></li>
-      <li><h:link rendered="#{authMb.user.is_admin == 1}" value="Posts" outcome="posts"></h:link></li>
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Opciones
-        <i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#{authMb.logout()}">Salir</a></li>
+		<li class="divider"></li>
+		<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+	</ul>
+	<nav class="red darken-1">
+		<div class="nav-wrapper container">
+			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
+			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
+				Blog - Home</a>
+			<ul class="right">
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Usuarios" outcome="users">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Posts" outcome="posts">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Comentarios" outcome="comments">
+					</h:link>
+				</li>
+				<li>
+					<a class="dropdown-button" href="#!" data-activates="dropdown1">
+						Opciones <i class="material-icons right">arrow_drop_down</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
-<div class="row" style="margin:0 auto;">
-  <div class="col s12 m8 l8 offset-m2 offset-l2">
+	<div class="row" style="margin: 0 auto;">
+		<div class="col s12 m8 l8 offset-m2 offset-l2">
 
-      <h3 class="red-text darken-1">Bienvenido <h:outputText value="#{authMb.user.name}" /></h3>
-      <br></br>
+			<h3 class="red-text darken-1">
+				Bienvenido
+				<h:outputText value="#{authMb.user.name}" />
+			</h3>
+			<br></br>
 
-        <h:form>
+			<h:form id="formPost">
 
-        <div class="input-field">
-          <i class="material-icons prefix">mode_edit</i>
-          <h:inputTextarea id="icon_prefix2" class="materialize-textarea" value="#{postMb.contenido}"></h:inputTextarea>
-          <label for="icon_prefix2">Inspirate</label>
-          <h:commandLink action="#{postMb.crearPost()}" >
-        		<button class="btn waves-effect red waves-light darken-1" type="submit" name="action">Crear Post
-              <i class="material-icons right">send</i>
-            </button>
-		      </h:commandLink>
-        </div>
+				<div class="input-field">
+					<i class="material-icons prefix">mode_edit</i>
+					<h:inputTextarea id="icon_prefix2" class="materialize-textarea" value="#{postMb.contenido}">
+					</h:inputTextarea>
+					<label for="icon_prefix2">Inspirate</label>
 
-      </h:form>
 
-  <br></br>
-  <br></br>
-  <hr></hr>
-  <br></br>
+					<h:commandLink onclick="postSuccesful(#{post.id})" styleClass="waves-effect red btn" action="#{postMb.crearPost()}">
+						<i class="material-icons right">send</i>
+			    	Publicar
+			    	<f:ajax render="listPost" execute="formPost"></f:ajax>
+					</h:commandLink>
+				</div>
 
-  <ui:repeat var="post" value="#{postMb.getPosts()}">
-    <div class="col s12 m6">
+			</h:form>
 
-      <div class="card">
-        <div class="card-image">
-          <img src="https://placeimg.com/400/200/tech"/>
-          <span class="card-title">#{post.user.name}</span>
-          <a href="#modal#{post.id}" onclick="openModal(#{post.id})" class="btn-floating halfway-fab waves-effect waves-light red">
-            <i class="large material-icons">comment</i>
-          </a>
-        </div>
-        <div class="card-content">
-          <p>#{post.contenido}</p>
-        </div>
-        <div class="card-action">
-          <p href="#">#{post.date}</p>
-        </div>
-      </div>
+			<br></br> <br></br>
+			<hr></hr>
+			<br></br>
 
-      <div id="modal#{post.id}" class="modal">
-        <div class="modal-content">
-          <p>#{post.user.name} dice: <span class="red-text">"#{post.contenido}"</span></p>
-          <div class="input-field col s12">
-            <h:inputTextarea id="icon_prefix1" class="materialize-textarea" value="#{postMb.contenido}"></h:inputTextarea>
-            <label for="icon_prefix1">Comentar</label>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" onclick="openModal(#{post.id})" class="modal-action modal-close waves-effect red-text waves-red btn-flat">
-            Cancelar
-          </a>
-          <a href="#!" class="modal-action modal-close waves-effect green-text waves-green btn-flat">
-            Confirmar
-          </a>
-        </div>
-      </div>
-      <script>
+		<h:panelGroup layout="block" id="listPost">
+			<ui:repeat var="post" value="#{postMb.getPosts()}">
+				<div class="col s12 m6">
+
+					<div class="card">
+						<div class="card-image">
+							<div class="card-image-position">
+								<img src="https://placeimg.com/400/200/tech" />
+								<div class="card-buttons-position">
+										<a href="" style="margin-right:5px;" class="btn-floating activator waves-effect waves-light grey darken-2">
+											<i class="large material-icons">remove_red_eye</i>
+										</a>
+										<a href="#modal#{post.id}" onclick="openModal(#{post.id})" class="btn-floating waves-effect waves-light red">
+											<i class="large material-icons">comment</i>
+										</a>
+								</div>
+							</div>
+							<span style="font-weight: bold" class="card-title red-text darken-1">
+								#{post.user.name} <small>#{post.date}</small>
+							</span>
+
+						</div>
+
+						<div class="card-content">
+							<p class="title-post ">#{post.contenido}</p>
+						</div>
+
+						<div id="card-reveal#{post.id}" class="card-reveal">
+							<span class="card-title grey-text text-darken-2">Comentarios<i class="material-icons right">close</i></span>
+							<h:panelGroup layout="block" id="listComment">
+								<ui:repeat var="comment" value="#{commentMb.listByPost(post)}">
+									<p>
+										<a href="" class="collection-item black-text">
+											<strong class="red-text">#{comment.user.name}:</strong>
+											#{comment.content}
+											<small>#{comment.date}</small>
+										</a>
+									</p>
+								</ui:repeat>
+							</h:panelGroup>
+				    </div>
+
+						<div class="card-action">
+									<a href="" style="cursor:pointer" class="grey-text darken-2 activator">
+										#{commentMb.getMessageFromTotalComments(post)}
+									</a>
+						</div>
+					</div>
+
+					<div id="modal#{post.id}" class="modal">
+					<h:form>
+						<div class="modal-content">
+							<p>
+								#{post.user.name} dice: <span class="red-text">"#{post.contenido}"</span>
+							</p>
+							<div class="input-field col s12">
+								<h:inputTextarea id="icon_prefix1" styleClass="materialize-textarea"
+									value="#{commentMb.content}"></h:inputTextarea>
+								<label for="icon_prefix1">Comentar</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+								<a href="#!" onclick="openModal(#{post.id})" class="modal-action modal-close waves-effect red-text waves-red btn-flat">
+								Cancelar
+								</a>
+								<h:commandLink onclick="commentSuccesful(#{post.id})" action="#{commentMb.createComment(post)}" styleClass="modal-action waves-effect green-text waves-red btn-flat">
+								Confirmar
+								<f:ajax render="listPost" execute="@form"></f:ajax>
+								</h:commandLink>
+						</div>
+						</h:form>
+					</div>
+
+					<script>
       $(document).ready(function(){
         $('.modal').modal();
+
       });
 
       function openModal(id) {
         $('#modal'+id).modal('open');
       }
-      function close(id) {
+      function commentSuccesful(id) {
         $('#modal'+id).modal('close');
+				swal({
+			     title: "Comentario",
+			     text: "Gracias, se ha publicado tu comentario.",
+			     icon: "success",
+			     timer: 1500
+		     });
+      }
+			function postSuccesful() {
+				swal({
+			     title: "Post",
+			     text: "Gracias, se ha publicado tu post.",
+			     icon: "success",
+			     timer: 1500
+		     });
       }
       </script>
 
 
-    </div>
-  </ui:repeat>
+				</div>
+			</ui:repeat>
+
+			</h:panelGroup>
 
 
 
 
 
 
-  </div>
-</div>
+		</div>
+	</div>
 
 </h:body>
 </html>

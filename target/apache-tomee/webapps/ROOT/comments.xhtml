@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+
+	<title>Tech Blog - Comments</title>
+
+	<link rel="icon" href="images/logo.png"/>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet" />
+
+	<style>
+#logo {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+</style>
+
+
+</h:head>
+
+<h:body>
+
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="#{authMb.logout()}">Salir</a></li>
+		<li class="divider"></li>
+		<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
+	</ul>
+	<nav class="red darken-1">
+		<div class="nav-wrapper container">
+			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
+			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
+				Blog - Comentarios</a>
+			<ul class="right">
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Usuarios" outcome="users">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Posts" outcome="posts">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Comentarios" outcome="comments">
+					</h:link>
+				</li>
+				<li>
+					<a class="dropdown-button" href="#!" data-activates="dropdown1">
+						Opciones <i class="material-icons right">arrow_drop_down</i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<h:outputText rendered="#{authMb.user.is_admin == 1}">
+		<div class="container">
+
+			<h2 class="red-text text-darken-1">Lista de Comentarios</h2>
+
+			<h:panelGroup id="listComments">
+				<h:dataTable value="#{commentMb.getComments()}" var="c"
+					styleClass="responsive-table">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+		    					#{c.id}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Usuario</f:facet>
+		    					#{c.user.name}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Comentario</f:facet>
+									#{c.content}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Post</f:facet>
+								<strong>#{c.post.user.name}:</strong> #{c.post.contenido}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+							<h:form>
+								<div>
+								<h:commandLink action="#{commentMb.deleteComment(c)}" styleClass="waves-effect red-text waves-red btn-flat">
+										Borrar
+										<i class="material-icons red-text right">delete</i>
+									<f:ajax render="listComments" execute="@form"></f:ajax>
+								</h:commandLink>
+								</div>
+							</h:form>
+					</h:column>
+
+				</h:dataTable>
+			</h:panelGroup>
+
+		</div>
+	</h:outputText>
+
+</h:body>
+</html>
