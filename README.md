@@ -22,6 +22,10 @@ Comentarios:
 
 ![Image of inicio](src/main/webapp/images/Captura3.JPG)
 
+Vista de Comentarios:
+
+![Image of inicio](src/main/webapp/images/Captura4.JPG)
+
 **¿Como utilizo este proyecto?**
 Para que el proyecto se conecte con *Maven* y haga la conexion con la Base de datos es necesario seguir los siguientes pasos:
 1) En la consola del Sistema (CMD en Windows) ubicarse en la ruta del proyecto.
