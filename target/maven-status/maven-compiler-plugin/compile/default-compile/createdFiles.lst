@@ -1,3 +1,4 @@
+view\ImageServlet.class
 view\RegisterMb.class
 controller\CommentController.class
 controller\UserController.class
@@ -5,7 +6,9 @@ view\AuthMb.class
 view\UserMb.class
 model\Post.class
 filter\AuthFilter.class
+controller\ImageController.class
 controller\PostController.class
+model\Image.class
 view\PostMb.class
 view\CommentMb.class
 model\Comment.class

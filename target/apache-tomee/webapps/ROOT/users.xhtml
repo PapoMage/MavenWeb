@@ -4,7 +4,9 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 
-	<title>Tech Blog - Inicio</title>
+	<title>Tech Blog - Users</title>
+
+	<link rel="icon" href="images/logo.png"/>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet"
@@ -19,6 +21,9 @@
 	width: 60px;
 	height: 60px;
 	margin-right: 20px;
+}
+.button-active{
+	background:#B71C1C
 }
 </style>
 
@@ -38,50 +43,76 @@
 			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
 				Blog - Usuarios</a>
 			<ul class="right">
-				<li><h:link rendered="#{authMb.user.is_admin == 1}"
-						value="Usuarios" outcome="users"></h:link></li>
-				<li><h:link rendered="#{authMb.user.is_admin == 1}"
-						value="Posts" outcome="posts"></h:link></li>
-				<li><a class="dropdown-button" href="#!"
-					data-activates="dropdown1">Opciones <i
-						class="material-icons right">arrow_drop_down</i></a></li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" styleClass="button-active" value="Usuarios" outcome="users">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Posts" outcome="posts">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Comentarios" outcome="comments">
+					</h:link>
+				</li>
+				<li>
+					<a class="dropdown-button" href="#!" data-activates="dropdown1">
+						Opciones <i class="material-icons right">arrow_drop_down</i>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
 
 
 
-	<div class="container">
+	<h:outputText rendered="#{authMb.user.is_admin == 1}">
+		<div class="container">
 
-		<h2 class="red-text text-darken-1">Lista de usuarios</h2>
+			<h2 class="red-text text-darken-1">Lista de usuarios</h2>
 
-		<h:dataTable value="#{userMb.getUsers()}" var="u"
-			styleClass="responsive-table">
-			<h:column>
-				<f:facet name="header">Id</f:facet>
-    					#{u.id}
-    	</h:column>
-			<h:column>
-				<f:facet name="header">Email</f:facet>
-    					#{u.email}
-    	</h:column>
-			<h:column>
-				<f:facet name="header">Nombre</f:facet>
-    					#{u.name}
-    	</h:column>
-			<h:column>
-				<f:facet name="header">Admin</f:facet>
-				<h:outputLabel rendered="#{u.is_admin == 1}">
-					<i class="material-icons green-text">check</i>
-				</h:outputLabel>
-				<h:outputLabel rendered="#{u.is_admin == 0}">
-					<i class="material-icons red-text">clear</i>
-				</h:outputLabel>
-			</h:column>
+			<h:panelGroup id="listUsers">
+				<h:dataTable value="#{userMb.getUsers()}" var="u"
+					styleClass="responsive-table">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+		    					#{u.id}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+		    					#{u.email}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Nombre</f:facet>
+		    					#{u.name}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Admin</f:facet>
+						<h:outputLabel rendered="#{u.is_admin == 1}">
+							<i class="material-icons green-text">check</i>
+						</h:outputLabel>
+						<h:outputLabel rendered="#{u.is_admin == 0}">
+							<i class="material-icons red-text">clear</i>
+						</h:outputLabel>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+							<h:form>
+								<div>
+								<h:commandLink action="#{userMb.deleteUser(u)}" styleClass="waves-effect red-text waves-red btn-flat">
+										Borrar
+										<i class="material-icons red-text right">delete</i>
+									<f:ajax render="listUsers" execute="@form"></f:ajax>
+								</h:commandLink>
+								</div>
+							</h:form>
+					</h:column>
 
-		</h:dataTable>
+				</h:dataTable>
+			</h:panelGroup>
 
-	</div>
+		</div>
+	</h:outputText>
 
 </h:body>
 </html>

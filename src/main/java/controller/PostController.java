@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.Image;
 import model.Post;
 import model.User;
 
@@ -31,8 +32,9 @@ public class PostController {
 		return q.getResultList();
 	}
 
-	public void addPost(Post post) {
+	public void addPost(Post post, Image img) {
 		em.persist(post);
+		em.persist(img);
 	}
 	
 	public void removePost(Post post) {

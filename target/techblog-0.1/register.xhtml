@@ -51,7 +51,22 @@
 					<h:inputSecret id="password" value="#{registerMb.password}" />
 					<label for="icon_prefix">Password</label>
 
+				
 				</div>
+				
+				
+					<div class="file-field input-field">
+						<div>
+							<i class="material-icons prefix red-text"> image</i> <input type="file" id="file"/>
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text"/>
+							<label style="padding-left:40px" for="icon_prefix">Imagen de Perfil:</label>
+						</div>
+					</div>
+					
+					<br></br>
+
 				<div class="align-center">
 					<h:commandLink action="#{registerMb.register()}">
 						<button

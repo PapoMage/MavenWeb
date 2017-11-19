@@ -21,6 +21,9 @@ public class Post {
 	private User user;
 
 	private int user_id;
+	
+	@ManyToOne
+	private Image image;
 
 	@NotNull
 	private String contenido;
@@ -66,5 +69,14 @@ public class Post {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
 
 }

@@ -14,13 +14,14 @@ rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 rem See the License for the specific language governing permissions and
 rem limitations under the License.
 
-if "%OS%" == "Windows_NT" setlocal
+
+setlocal
 
 set port=8080
 
 rem Guess CATALINA_HOME if not defined
 set "CURRENT_DIR=%cd%"
-if not "%CATALINA_HOME%" == "" goto gotHome
+if DEFINED CATALINA_HOME goto gotHome
 set "CATALINA_HOME=%CURRENT_DIR%"
 if exist "%CATALINA_HOME%\bin\catalina.bat" goto okHome
 cd ..
@@ -35,13 +36,20 @@ goto end
 :okHome
 
 rem Copy CATALINA_BASE from CATALINA_HOME if not defined
-if not "%CATALINA_BASE%" == "" goto gotBase
+if DEFINED CATALINA_BASE goto gotBase
 set "CATALINA_BASE=%CATALINA_HOME%"
 :gotBase
 
 rem Ensure that any user defined CLASSPATH variables are not used on startup,
 rem but allow them to be specified in setenv.bat, in rare case when it is needed.
 set CLASSPATH=
+
+if not exist "%CATALINA_BASE%\bin\tomcat-juli.jar" goto juliClasspathHome
+set "CLASSPATH=%CLASSPATH%;%CATALINA_BASE%\bin\tomcat-juli.jar"
+goto juliClasspathDone
+:juliClasspathHome
+set "CLASSPATH=%CLASSPATH%;%CATALINA_HOME%\bin\tomcat-juli.jar"
+:juliClasspathDone
 
 rem Get standard Java environment variables
 if exist "%CATALINA_HOME%\bin\setclasspath.bat" goto okSetclasspath
@@ -52,33 +60,41 @@ goto end
 call "%CATALINA_HOME%\bin\setclasspath.bat" %1
 if errorlevel 1 goto end
 
-
-if not "%CATALINA_TMPDIR%" == "" goto gotTmpdir
+if DEFINED CATALINA_TMPDIR goto gotTmpdir
 set "CATALINA_TMPDIR=%CATALINA_BASE%\temp"
 :gotTmpdir
 
+if not exist %CATALINA_BASE% goto :libClasspathHome
+set CLASSPATH=%CLASSPATH%;%CATALINA_BASE%\lib\*
+if "%CATALINA_BASE%" equ %CATALINA_HOME% goto :libClasspathDone
+:libClasspathHome
+if not exist %CATALINA_HOME% goto :libClasspathDone
+set CLASSPATH=%CLASSPATH%;%CATALINA_HOME%\lib\*
+:libClasspathDone
 
-rem create classpath
-setlocal enabledelayedexpansion
-
-set cp="%CATALINA_HOME%\bin\tomcat-juli.jar"
-set lib="%CATALINA_HOME%\lib\"
-echo %lib%
-for %%F in (%lib%/*.jar) do (
-  set cp=!cp!;%%F%
-)
-
+set DEBUG=
+set "args=%*"
 if ""%1"" == ""deploy"" goto doDeploy
 if ""%1"" == ""undeploy"" goto doUndeploy
+if ""%1"" == ""start"" goto unsupportedCmd
+if ""%1"" == ""stop"" goto unsupportedCmd
+if not ""%1"" == ""debug"" goto doExec
+set DEBUG=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005
+set "args=%*"
+set "args=%args:* =%"
 goto doExec
 
 :doDeploy
 :doUndeploy
-%_RUNJAVA% -cp "%cp%" -Djava.io.tmpdir="%CATALINA_TMPDIR%" org.apache.openejb.cli.Bootstrap %1 -s http://localhost:%port%/tomee/ejb %2
+%_RUNJAVA% -Djava.io.tmpdir="%CATALINA_TMPDIR%" org.apache.openejb.cli.Bootstrap %1 -s http://localhost:%port%/tomee/ejb %2
+goto end
+
+:unsupportedCmd
+echo start/stop commands are not compatible with tomee.bat, please use catalina.bar/startup.bat/shutdown.bat
 goto end
 
 :doExec
-%_RUNJAVA% -cp "%cp%" -Djava.io.tmpdir="%CATALINA_TMPDIR%" org.apache.openejb.cli.Bootstrap %*
+%_RUNJAVA% %DEBUG% "-Dopenejb.base=%CATALINA_BASE%" "-Dopenejb.home=%CATALINA_HOME%" "-Djava.io.tmpdir=%CATALINA_TMPDIR%" org.apache.openejb.cli.Bootstrap %args%
 goto end
 
 :end

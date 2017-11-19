@@ -60,9 +60,9 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.openejb.maven</groupId>
-        <artifactId>tomee-maven-plugin</artifactId>
-        <version>1.7.0</version>
+        <groupId>org.apache.tomee.maven</groupId>
+	    <artifactId>tomee-maven-plugin</artifactId>
+	    <version>7.0.4</version>
         <configuration>
           <context>ROOT</context>
           <reloadOnUpdate>true</reloadOnUpdate>

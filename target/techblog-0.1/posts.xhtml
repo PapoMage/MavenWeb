@@ -5,7 +5,7 @@
 <h:head>
 
 	<title>Tech Blog - Posts</title>
-	
+
 	<link rel="icon" href="images/logo.png"/>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -21,6 +21,9 @@
 	width: 60px;
 	height: 60px;
 	margin-right: 20px;
+}
+.button-active{
+	background:#B71C1C
 }
 </style>
 
@@ -39,49 +42,80 @@
 		<div class="nav-wrapper container">
 			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
 			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
-				Blog - Blogs</a>
+				Blog - Home</a>
 			<ul class="right">
-				<li><h:link rendered="#{authMb.user.is_admin == 1}"
-						value="Usuarios" outcome="users"></h:link></li>
-				<li><h:link rendered="#{authMb.user.is_admin == 1}"
-						value="Posts" outcome="posts"></h:link></li>
-				<li><a class="dropdown-button" href="#!"
-					data-activates="dropdown1">Opciones <i
-						class="material-icons right">arrow_drop_down</i></a></li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Usuarios" outcome="users">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" styleClass="button-active" value="Posts" outcome="posts">
+					</h:link>
+				</li>
+				<li>
+					<h:link rendered="#{authMb.user.is_admin == 1}" value="Comentarios" outcome="comments">
+					</h:link>
+				</li>
+				<li>
+					<a class="dropdown-button" href="#!" data-activates="dropdown1">
+						Opciones <i class="material-icons right">arrow_drop_down</i>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
 
-	<div class="container">
+	<h:outputText rendered="#{authMb.user.is_admin == 1}">
+		<div class="container">
 
-		<h2 class="red-text text-darken-1">Lista de posts</h2>
+			<h2 class="red-text text-darken-1">Lista de posts</h2>
 
-		<h:dataTable value="#{postMb.getPosts()}" var="p"
-			styleClass="responsive-table">
+			<h:panelGroup id="listPosts">
+				<h:dataTable value="#{postMb.getPosts()}" var="p"
+					styleClass="responsive-table">
 
-			<h:column>
-				<f:facet name="header">Id</f:facet>
-    					#{p.id}
-    	</h:column>
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+		    					#{p.id}
+		    	</h:column>
 
-			<h:column>
-				<f:facet name="header">Usuario</f:facet>
-    					#{p.user.email}
-    	</h:column>
+					<h:column>
+						<f:facet name="header">Usuario</f:facet>
+		    					#{p.user.email}
+		    	</h:column>
 
-			<h:column>
-				<f:facet name="header">Contenido</f:facet>
-    					#{p.contenido}
-    	</h:column>
+					<h:column>
+						<f:facet name="header">Contenido</f:facet>
+		    					#{p.contenido}
+		    	</h:column>
+					<h:column>
+						<f:facet name="header">Comentarios</f:facet>
+		    					#{commentMb.getTotalComments(p)}
+		    	</h:column>
 
-			<h:column>
-				<f:facet name="header">Fecha</f:facet>
-    					#{p.date}hs
-    	</h:column>
+					<h:column>
+						<f:facet name="header">Fecha</f:facet>
+		    					#{p.date}hs
+		    	</h:column>
+					<h:column class="hide#{p.id}">
+						<f:facet name="header">Acciones</f:facet>
+							<h:form>
+								<div>
+								<h:commandLink action="#{postMb.deletePost(p)}" styleClass="waves-effect red-text waves-red btn-flat">
+									<span id="text-delete#{p.id}">Borrar
+										<i class="material-icons red-text right">delete</i>
+									</span>
+									<f:ajax render="listPosts" execute="@form"></f:ajax>
+								</h:commandLink>
+								</div>
+							</h:form>
+					</h:column>
 
-		</h:dataTable>
+				</h:dataTable>
+			</h:panelGroup>
 
-	</div>
+		</div>
+	</h:outputText>
 
 </h:body>
 </html>
