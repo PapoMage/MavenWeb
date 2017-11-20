@@ -1,8 +1,0 @@
-<tomee>
-	<Resource id="MysqlDs" type="DataSource">
-	    JdbcDriver  com.mysql.jdbc.Driver
-	    JdbcUrl jdbc:mysql://localhost/blog_maven
-	    UserName    mbobbio
-	    Password    1234
-	</Resource>
-</tomee>
