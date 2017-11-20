@@ -1,27 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<title>Tech Blog</title>
+<ui:composition template="/WEB-INF/templates/base.xhtml">
 
-	<link rel="icon" href="images/logo.png" />
+	<ui:define name="title">Tech Blog - Registro</ui:define>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-		rel="stylesheet" />
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-
-</h:head>
-<h:body>
-
-
+	<ui:define name="content">
 
 	<div class="row" style="margin: 0 auto;">
 		<div class="col s12 m8 l4 offset-m2 offset-l4">
@@ -34,24 +21,39 @@
 					style="padding:5px;display:none" />
 			</div>
 
-			<h:form>
+			<h:form enctype="multipart/form-data">
+
 				<div class="input-field">
 					<i class="material-icons prefix red-text">face</i>
 					<h:inputText id="name" value="#{registerMb.name}" />
 					<label for="icon_prefix">Nombre</label>
 				</div>
+
 				<div class="input-field">
 					<i class="material-icons prefix red-text">account_circle</i>
 					<h:inputText id="email" value="#{registerMb.email}" />
 					<label for="icon_prefix">Email</label>
-
 				</div>
+
 				<div class="input-field">
 					<i class="material-icons prefix red-text">vpn_key</i>
 					<h:inputSecret id="password" value="#{registerMb.password}" />
 					<label for="icon_prefix">Password</label>
-
 				</div>
+
+				<div class="file-field input-field">
+					<div class="waves-effect red btn">
+						<span><i class="material-icons right">attach_file</i>
+						Foto de perfil</span>
+						<h:inputFile id="file" value="#{registerMb.file}"/>
+					</div>
+					<div class="file-path-wrapper">
+						<input class="file-path validate" type="text" placeholder="Suba imagen de su historia"/>
+					</div>
+				</div>
+
+				<br></br>
+
 				<div class="align-center">
 					<h:commandLink action="#{registerMb.register()}">
 						<button
@@ -63,12 +65,7 @@
 		</div>
 	</div>
 
-	<script>
-		if ($('#alerts ul').length) {
-			swal("Error en el registro", $('#alerts ul li').text(), "error");
-		}
-	</script>
+	</ui:define>
+</ui:composition>
 
-
-</h:body>
 </html>

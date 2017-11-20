@@ -1,0 +1,47 @@
+.modal {
+	height: 35%;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+#logo {
+	width: 60px;
+	height: 60px;
+	margin-right: 20px;
+}
+
+.title-post {
+	font-size: 21px;
+}
+
+.card-image-position {
+	position: relative;
+}
+
+.card-buttons-position-bottom {
+	position: absolute;
+	bottom: -5%;
+	left: 73%;
+}
+
+.card-buttons-position-top-right {
+	position: absolute;
+	top: 6%;
+	left: 85%;
+}
+
+.card-buttons-position-top-left {
+	position: absolute;
+	top: 6%;
+	right: 85%;
+}
+
+.card-username{
+	font-size:28px;
+}
+
+.card-contenido{
+	font-size:19px;
+}

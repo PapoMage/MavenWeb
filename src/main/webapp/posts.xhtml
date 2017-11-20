@@ -1,87 +1,80 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<title>Tech Blog - Posts</title>
-	
-	<link rel="icon" href="images/logo.png"/>
+<ui:composition template="/WEB-INF/templates/base.xhtml">
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-		rel="stylesheet" />
+	<ui:define name="title">Tech Blog - Posts</ui:define>
 
-	<style>
-#logo {
-	width: 60px;
-	height: 60px;
-	margin-right: 20px;
-}
-</style>
+	<ui:define name="content">
 
+	<ui:include src="/WEB-INF/templates/header.xhtml"/>
 
+	<h:outputText rendered="#{authMb.user.is_admin == 1}">
+		<div class="container">
 
-</h:head>
+			<h2 class="red-text text-darken-1">Lista de posts</h2>
 
-<h:body>
+			<h:panelGroup id="listPosts">
+				<h:dataTable value="#{postMb.getPosts()}" var="p"
+					styleClass="responsive-table">
 
-	<ul id="dropdown1" class="dropdown-content">
-		<li><a href="#{authMb.logout()}">Salir</a></li>
-		<li class="divider"></li>
-		<li><h:link value="Mis Posts" outcome="perfil"></h:link></li>
-	</ul>
-	<nav class="red darken-1">
-		<div class="nav-wrapper container">
-			<img class="circle responsive-img" src="images/logo.png" id="logo"></img>
-			<a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
-				Blog - Blogs</a>
-			<ul class="right">
-				<li><h:link rendered="#{authMb.user.is_admin == 1}"
-						value="Usuarios" outcome="users"></h:link></li>
-				<li><h:link rendered="#{authMb.user.is_admin == 1}"
-						value="Posts" outcome="posts"></h:link></li>
-				<li><a class="dropdown-button" href="#!"
-					data-activates="dropdown1">Opciones <i
-						class="material-icons right">arrow_drop_down</i></a></li>
-			</ul>
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+		    					#{p.id}
+		    	</h:column>
+
+					<h:column>
+						<f:facet name="header">Usuario</f:facet>
+		    					#{p.user.email}
+		    	</h:column>
+
+					<h:column>
+						<f:facet name="header">Contenido</f:facet>
+		    					#{p.contenido}
+		    	</h:column>
+
+					<h:column>
+						<f:facet name="header">Comentarios</f:facet>
+		    					#{commentMb.getTotalComments(p)}
+		    	</h:column>
+
+					<h:column>
+						<f:facet name="header">Tiene imagen</f:facet>
+						<h:outputLabel rendered="#{p.image != null}">
+							<i class="material-icons green-text">check</i>
+						</h:outputLabel>
+						<h:outputLabel rendered="#{p.image == null}">
+							<i class="material-icons red-text">clear</i>
+						</h:outputLabel>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Fecha</f:facet>
+		    					#{p.date}hs
+		    	</h:column>
+					<h:column class="hide#{p.id}">
+						<f:facet name="header">Acciones</f:facet>
+							<h:form>
+								<div>
+								<h:commandLink action="#{postMb.deletePost(p)}" styleClass="waves-effect red-text waves-red btn-flat">
+									<span id="text-delete#{p.id}">Borrar
+										<i class="material-icons red-text right">delete</i>
+									</span>
+									<f:ajax render="listPosts" execute="@form"></f:ajax>
+								</h:commandLink>
+								</div>
+							</h:form>
+					</h:column>
+
+				</h:dataTable>
+			</h:panelGroup>
+
 		</div>
-	</nav>
+	</h:outputText>
 
-	<div class="container">
-
-		<h2 class="red-text text-darken-1">Lista de posts</h2>
-
-		<h:dataTable value="#{postMb.getPosts()}" var="p"
-			styleClass="responsive-table">
-
-			<h:column>
-				<f:facet name="header">Id</f:facet>
-    					#{p.id}
-    	</h:column>
-
-			<h:column>
-				<f:facet name="header">Usuario</f:facet>
-    					#{p.user.email}
-    	</h:column>
-
-			<h:column>
-				<f:facet name="header">Contenido</f:facet>
-    					#{p.contenido}
-    	</h:column>
-
-			<h:column>
-				<f:facet name="header">Fecha</f:facet>
-    					#{p.date}hs
-    	</h:column>
-
-		</h:dataTable>
-
-	</div>
-
-</h:body>
+</ui:define>
+</ui:composition>
 </html>

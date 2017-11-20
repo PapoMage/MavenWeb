@@ -78,5 +78,18 @@ public class AuthMb implements Serializable {
 	public String register() {
 		return "register.xhtml";
 	}
+	
+	public String getSrcImage(User user){
+		
+		String src;
+		
+		if(user.getImage() == null) {
+			src = "images/profile-default.jpg";
+		}else {
+			src = "/imageuser/"+user.getImage().getPath();
+		}
+		
+		return src;
+	}
 
 }

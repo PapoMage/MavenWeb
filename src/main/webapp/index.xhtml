@@ -1,24 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<title>Tech Blog</title>
+<ui:composition template="/WEB-INF/templates/base.xhtml">
 
-	<link rel="icon" href="images/logo.png" />
+	<ui:define name="title">Tech Blog - Login</ui:define>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-		rel="stylesheet" />
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-</h:head>
-<h:body>
+	<ui:define name="content">
 
 	<div id="alerts">
 		<h:messages styleClass="card red white-text"
@@ -31,7 +21,7 @@
 			<h1 class="red-text text-darken-1 center-align">Tech Blog</h1>
 			<div class="center-align">
 				<img class="circle responsive-img center-align"
-					src="images/logo.png" id="logo"></img>
+					src="images/logo.png" id="logo-principal"></img>
 			</div>
 			<br></br>
 			<br></br>
@@ -68,6 +58,6 @@
 		}
 	</script>
 
-
-</h:body>
+</ui:define>
+</ui:composition>
 </html>

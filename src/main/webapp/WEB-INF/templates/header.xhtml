@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+  <ui:composition>
+
+    <nav class="red darken-1">
+      <div class="nav-wrapper container">
+        <img class="circle responsive-img" src="images/logo.png" id="logo"></img>
+        <a href="home.xhtml" class="brand-logo hide-on-med-and-down">Tech
+          Blog</a>
+        <ul class="right">
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              value="Usuarios" outcome="users">
+            </h:link></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              value="Posts" outcome="posts">
+            </h:link></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              value="Comentarios" outcome="comments">
+            </h:link></li>
+          <li><a href="#!" style="padding-right: 30px;"
+            data-activates="slide-out"
+            class="waves-effect waves-light button-collapse show-on-medium-and-up">
+              <i class="material-icons right medium">menu</i>
+          </a></li>
+        </ul>
+        <ul id="slide-out" class="side-nav">
+          <li><div class="user-view">
+              <div class="background">
+                <img src="images/background.png" class="responsive-img"
+                  alt="background" />
+              </div>
+              <a href="#!user"><img class="circle" src="#{authMb.getSrcImage(authMb.user)}"
+                alt="profile" /></a> <a href="#!name"><span
+                class="white-text name">#{authMb.user.name}</span></a> <a
+                href="#!email"><span class="white-text email">#{authMb.user.email}</span></a>
+            </div></li>
+          <li><a class="subheader">Accesos directos</a></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              outcome="users">
+              <i class="material-icons">person</i>Usuarios</h:link></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              outcome="posts">
+              <i class="material-icons">create</i>Posts</h:link></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              outcome="comments">
+              <i class="material-icons">comment</i>Comentarios</h:link></li>
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Opciones</a></li>
+          <li><h:link outcome="perfil">
+              <i class="material-icons">border_color</i> Mis posts</h:link></li>
+          <li><a href="#{authMb.logout()}"><i class="material-icons">exit_to_app</i>
+              Salir</a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </ui:composition>
+
+</html>

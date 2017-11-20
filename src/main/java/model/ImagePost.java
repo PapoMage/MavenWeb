@@ -6,16 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Image {
-
+public class ImagePost {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+	
 	private String type;
-
+	
 	private String path;
-
+	
 	private long size;
 
 	public int getId() {

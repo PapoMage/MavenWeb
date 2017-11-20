@@ -49,7 +49,6 @@ public class CommentMb {
 	}
 	
 	
-	
 	public String getMessageFromTotalComments(Post post) {
 		int count = ccontroller.getByPost(post).size();
 		String msg;

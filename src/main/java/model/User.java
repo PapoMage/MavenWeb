@@ -1,9 +1,11 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,6 +26,9 @@ public class User {
 
 	@NotNull
 	private int is_admin;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+    private ImageUser image;
 
 	public int getId() {
 		return id;
@@ -63,6 +68,14 @@ public class User {
 
 	public void setIs_admin(int is_admin) {
 		this.is_admin = is_admin;
+	}
+	
+	public ImageUser getImage() {
+		return image;
+	}
+
+	public void setImage(ImageUser image) {
+		this.image = image;
 	}
 
 }

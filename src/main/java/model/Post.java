@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,11 +20,11 @@ public class Post {
 
 	@ManyToOne
 	private User user;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+    private ImagePost image;
 
 	private int user_id;
-	
-	@ManyToOne
-	private Image image;
 
 	@NotNull
 	private String contenido;
@@ -69,14 +70,13 @@ public class Post {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-
-	public Image getImage() {
+	
+	public ImagePost getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(ImagePost image) {
 		this.image = image;
 	}
-	
 
 }

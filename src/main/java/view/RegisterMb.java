@@ -8,29 +8,40 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 
+import controller.ImageUserController;
 import controller.UserController;
+import model.ImageUser;
 import model.User;
 
 
 
 @Named
+@MultipartConfig(location="/tmp",
+fileSizeThreshold=1024*1024, 
+maxFileSize=1024*1024*5,
+maxRequestSize=1024*1024*5*5)
 public class RegisterMb implements Serializable {
 
 	private static final long serialVersionUID = -2107638903454277960L;
 
 	@Inject
 	private UserController userCntr;
+	@Inject 
+	ImageUserController imgCntl;
 
 	private String email;
 	private String password;
 	private String name;
+	private Part file;
 
 	public String register() {
 
 		if (name.length() < 3) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"El username debe ser mayor a 3 caracteres" + name + password + email, null);
+					"El username debe ser mayor a 3 caracteres", null);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return "#";
 		}
@@ -45,6 +56,15 @@ public class RegisterMb implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return "#";
 		}
+		if (!file.getContentType().startsWith("image/")) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "No has subido un archivo de tipo imagen", null);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return "#";
+		}
+		
+		
+		
+		ImageUser img;
 
 		User user = new User();
 		user.setEmail(email);
@@ -52,8 +72,18 @@ public class RegisterMb implements Serializable {
 		user.setName(name);
 		user.setPassword(password);
 		user.setIs_admin(0);
-		userCntr.register(user);
+		try{
+			img = null;
+			if(file != null && file.getSize() > 0 && file.getContentType().startsWith("image/")){
+				img = imgCntl.upload(file);
+				user.setImage(img);
+				
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 
+		userCntr.register(user);
 		return "index";
 	}
 
@@ -79,6 +109,14 @@ public class RegisterMb implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Part getFile() {
+		return file;
+	}
+
+	public void setFile(Part file) {
+		this.file = file;
 	}
 
 	private boolean validateEmail(String mail) {
