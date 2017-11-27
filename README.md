@@ -12,23 +12,15 @@ Maven, Tomee, Materialize y Java
 
 Inicio:
 
-![Image of inicio](src/main/webapp/images/Captura5.JPG)
+![Image of inicio](src/main/webapp/images/Captura.JPG)
 
-Lista de Posts:
+Lista de Usuarios:
 
 ![Image of inicio](src/main/webapp/images/Captura2.JPG)
 
 Comentarios:
 
 ![Image of inicio](src/main/webapp/images/Captura3.JPG)
-
-Vista de Registro:
-
-![Image of inicio](src/main/webapp/images/Captura4.JPG)
-
-Menu de Perfil:
-
-![Image of inicio](src/main/webapp/images/Captura.JPG)
 
 **¿Como utilizo este proyecto?**
 Para que el proyecto se conecte con *Maven* y haga la conexion con la Base de datos es necesario seguir los siguientes pasos:
@@ -39,10 +31,3 @@ Para que el proyecto se conecte con *Maven* y haga la conexion con la Base de da
   *localhost:8080/index.xhtml*
   Esto te redireccionara al index de la WEB.
 
-**Uso de la base de datos**
-En SQL ingresar lo siguiente:
-
-CREATE DATABASE blog_maven;
-GRANT USAGE ON *.* TO mbobbio@localhost IDENTIFIED BY '1234';
-GRANT ALL PRIVILEGES ON blog_maven.* TO mbobbio@localhost;
-USE blog_maven;

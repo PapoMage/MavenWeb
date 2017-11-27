@@ -33,13 +33,23 @@ public class AuthFilter implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
+		
+		
 
 		if ((request.getRequestURI().equals("/home.xhtml") && !authMb.isLogged())
 				|| (request.getRequestURI().equals("/posts.xhtml") && !authMb.isLogged())
 				|| (request.getRequestURI().equals("/perfil.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/comments.xhtml") && !authMb.isLogged())
 				|| (request.getRequestURI().equals("/users.xhtml") && !authMb.isLogged())) {
+			
 			response.sendRedirect("index.xhtml");
-		} else {
+		}
+		else if(request.getRequestURI().equals("/posts.xhtml") && authMb.getUser().getIs_admin() == 0
+				|| (request.getRequestURI().equals("/users.xhtml") && authMb.getUser().getIs_admin() == 0)
+				|| (request.getRequestURI().equals("/comments.xhtml") && authMb.getUser().getIs_admin() == 0)){
+			response.sendRedirect("home.xhtml");
+		}
+		else {
 			chain.doFilter(req, resp);
 		}
 
