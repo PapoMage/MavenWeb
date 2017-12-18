@@ -30,6 +30,16 @@ public class PostController {
 
 		return q.getResultList();
 	}
+	
+	public List<Post> getPostsByFollowers(User user) {
+		
+		String hql = "Select p from Post p where p.user_id = :user_id order by p.date desc";
+		TypedQuery<Post> q = em.createQuery(hql, Post.class);
+		q.setParameter("user_id", user.getId());
+
+		return q.getResultList();
+	}
+	
 
 	public void addPost(Post post) {
 		em.persist(post);

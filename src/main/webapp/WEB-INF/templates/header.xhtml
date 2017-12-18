@@ -20,6 +20,12 @@
           <li><h:link rendered="#{authMb.user.is_admin == 1}"
               value="Comentarios" outcome="comments">
             </h:link></li>
+            <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              value="Likes" outcome="likes">
+            </h:link></li>
+            <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              value="Seguidores" outcome="seguidores">
+            </h:link></li>
           <li><a href="#!" style="padding-right: 30px;"
             data-activates="slide-out"
             class="waves-effect waves-light button-collapse show-on-medium-and-up">
@@ -47,17 +53,29 @@
           <li><h:link rendered="#{authMb.user.is_admin == 1}"
               outcome="comments">
               <i class="material-icons">comment</i>Comentarios</h:link></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              outcome="likes">
+                <i class="material-icons">favorite</i>Likes</h:link></li>
+          <li><h:link rendered="#{authMb.user.is_admin == 1}"
+              outcome="seguidores">
+                <i class="material-icons">person_add</i>Seguidores</h:link></li>
           <li><div class="divider"></div></li>
-          <li><a class="subheader">Opciones</a></li>
+          <li><a class="subheader">General</a></li>
+          <li><h:link outcome="datos">
+              <i class="material-icons">face</i> Perfil
+            </h:link>
+          </li>
           <li><h:link outcome="perfil">
-              <i class="material-icons">border_color</i> Mis posts</h:link></li>
+              <i class="material-icons">border_color</i> Mis posts
+            </h:link>
+          </li>
+          <li><a class="subheader">Opciones</a></li>
           <li><a href="#{authMb.logout()}"><i class="material-icons">exit_to_app</i>
               Salir</a></li>
 
         </ul>
       </div>
     </nav>
-
   </ui:composition>
 
 </html>

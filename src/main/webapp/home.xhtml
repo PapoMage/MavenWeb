@@ -6,11 +6,87 @@
 
 <ui:composition template="/WEB-INF/templates/base.xhtml">
 
-		<ui:define name="title">Tech Blog - Inicio</ui:define>
+	<ui:define name="title">Tech Blog - Inicio</ui:define>
 
-		<ui:define name="content">
+	<ui:define name="content">
 
-		<ui:include src="/WEB-INF/templates/header.xhtml"/>
+		<ui:include src="/WEB-INF/templates/header.xhtml" />
+
+		<div class="grey lighten-4">
+			<div class="container form-search">
+				<div class="row">
+					<div class="col s8 red-text"
+						style="margin-top: 20px; font-size: 21px; text-align: right">Buscar
+						usuarios:</div>
+					<div class="input-field col s4">
+						<h:form id="formSearch">
+							<h:inputText value="#{searchMb.searchText}" id="save"
+								style="width: 80%;" />
+							<h:commandLink action="#{searchMb.searchUser()}">
+								<i class="material-icons red-text right"
+									style="margin-top: 7px;">search</i>
+								<f:ajax render="listUsers" execute="formSearch"></f:ajax>
+							</h:commandLink>
+						</h:form>
+					</div>
+				</div>
+				<div>
+					<h:panelGroup layout="block" id="listUsers">
+						<script src="/js/scripts.js"></script>
+						<h5 class="red-text" style="margin-bottom: 30px;">#{searchMb.updateSearchUserText()}</h5>
+						<ul class="collection">
+							<ui:repeat var="user" value="#{searchMb.getUsersSearch()}">
+								<li class="collection-item avatar" style="position: relative">
+									<a href="#modalsearch#{user.id}"
+									onclick="openModalSearch(#{user.id})" class="black-text"> <img
+										src="#{authMb.getSrcImage(user)}" alt="" class="circle" /> <strong
+										class="title">#{user.name}</strong>
+										<p>
+											Seguidores: #{followerMb.getFollowersByUser(user)} <br /> <span
+												class="#{followerMb.getMessageFollowColor(user)}">#{followerMb.getMessageFollow(user)}</span>
+										</p>
+								</a>
+									<div style="position: absolute; right: 5%; top: 30%;">
+										<h:form style="display:inline;margin-left:10px;">
+											<h:commandLink action="#{followerMb.crearFollower(user)}">
+												<i class="material-icons red-text" style="font-size: 22px;">#{followerMb.getIfExists(user)}</i>
+												<f:ajax render="listUsers" execute="@form"></f:ajax>
+											</h:commandLink>
+										</h:form>
+									</div>
+								</li>
+								<div id="modalsearch#{user.id}" style="height: 250% !important;"
+									class="modal">
+									<div class="modal-content">
+										<h3 class="red-text darken-1">Posts de #{user.name}</h3>
+										<div class="row">
+											<ui:repeat var="post" value="#{postMb.getPostsByUser(user)}">
+												<div class="col s12 m6">
+													<div class="card">
+														<div class="card-image">
+															<img src="https://placeimg.com/400/200/tech" /> <span
+																class="card-title">#{post.user.name}</span>
+														</div>
+														<div class="card-content">
+															<p>#{post.contenido}</p>
+														</div>
+														<div class="card-action">
+															<p href="#">#{post.date}hs</p>
+														</div>
+													</div>
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</div>
+							</ui:repeat>
+						</ul>
+						<br />
+
+					</h:panelGroup>
+				</div>
+			</div>
+		</div>
 
 		<div class="row" style="margin: 0 auto;">
 			<div class="col s12 m8 l8 offset-m2 offset-l2">
@@ -25,21 +101,23 @@
 
 					<div class="input-field">
 						<i class="material-icons prefix">mode_edit</i>
-						<h:inputTextarea id="contenido" class="materialize-textarea content-post"
+						<h:inputTextarea id="contenido"
+							class="materialize-textarea content-post"
 							value="#{postMb.contenido}">
 						</h:inputTextarea>
 						<label for="icon_prefix2">Inspirate</label>
 
 						<div class="file-field input-field">
-				      <div class="waves-effect red btn">
-				        <span><i class="material-icons right">attach_file</i>
-					    	Imagen</span>
-				        <h:inputFile id="file" value="#{postMb.file}"/>
-				      </div>
-				      <div class="file-path-wrapper">
-				        <input class="file-path validate" type="text" placeholder="Subí imagen de tu historia"/>
-				      </div>
-				    </div>
+							<div class="waves-effect red btn">
+								<span><i class="material-icons right">attach_file</i>
+									Imagen</span>
+								<h:inputFile id="file" value="#{postMb.file}" />
+							</div>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text"
+									placeholder="Subí imagen de tu historia" />
+							</div>
+						</div>
 
 						<br></br>
 
@@ -59,23 +137,55 @@
 				<hr></hr>
 				<br></br>
 
+
+				<div class="row">
+					<div class="col s8">
+						<h3 class="red-text darken-1">Inicio - Posts</h3>
+					</div>
+					<div class="input-field col s4">
+						<h:form id="formFilter">
+							<h:selectOneMenu value="#{postMb.statusFilter}">
+								<f:selectItem itemValue="1" itemLabel="Todos los posts"></f:selectItem>
+								<f:selectItem itemValue="2" itemLabel="Mis Posts"></f:selectItem>
+							</h:selectOneMenu>
+							<label>Seleccionar</label>
+							<h:commandLink styleClass="waves-effect red btn"
+								action="#{postMb.filtrarPost()}">
+								<i class="material-icons right">filter_list</i>
+							Filtrar
+							<f:ajax render="listPost" execute="formFilter"></f:ajax>
+							</h:commandLink>
+						</h:form>
+					</div>
+				</div>
+
+
+
 				<h:panelGroup layout="block" id="listPost">
+					<script src="/js/scripts.js"></script>
 					<ui:repeat var="post" value="#{postMb.getPosts()}">
 						<div class="col s12 m6">
 
 							<div class="card">
 								<div class="card-image">
 									<div class="card-image-position">
-										<img class="materialboxed" src="#{postMb.getSrcImage(post)}" width="100%" height="300"/>
+										<img class="materialboxed" src="#{postMb.getSrcImage(post)}"
+											width="100%" height="300" />
 										<div class="card-buttons-position-bottom">
 											<span style="margin-right: 5px;"
 												class="btn-floating activator waves-effect waves-light grey darken-2">
 												<i class="large material-icons">remove_red_eye</i>
-											</span>
-											<a href="#modal#{post.id}" onclick="openModal(#{post.id})"
-												class="btn-floating waves-effect waves-light red">
-												<i class="large material-icons">comment</i>
+											</span> <a href="#modal#{post.id}" onclick="openModal(#{post.id})"
+												class="btn-floating waves-effect waves-light green"> <i
+												class="large material-icons">comment</i>
 											</a>
+											<h:form style="display:inline;margin-left:10px;">
+												<h:commandLink action="#{favoriteMb.crearFavorite(post)}"
+													styleClass="btn-floating waves-effect waves-light red">
+													<i class="large material-icons">#{favoriteMb.getIfExists(post)}</i>
+													<f:ajax render="listPost" execute="@form"></f:ajax>
+												</h:commandLink>
+											</h:form>
 										</div>
 										<div class="card-buttons-position-top-right">
 											<i class="material-icons medium red-text">#{postMb.getIsImage(post)}</i>
@@ -83,8 +193,7 @@
 
 									</div>
 									<span style="font-weight: bold"
-										class="card-title red-text darken-1">
-										<small>#{post.date}hs</small>
+										class="card-title red-text darken-1"> <small>#{post.date}hs</small>
 									</span>
 
 								</div>
@@ -92,12 +201,13 @@
 								<div class="card-content">
 									<div class="row">
 										<div class="col s2">
-											<img class="circle responsive-img" src="#{authMb.getSrcImage(post.user)}" alt="profile"/>
+											<img class="circle responsive-img"
+												src="#{authMb.getSrcImage(post.user)}" alt="profile" />
 										</div>
 										<div class="col s10">
-										<span class="card-username red-text darken-1">#{post.user.name}</span>
-										<br></br>
-										<p class="title-post card-contenido">#{post.contenido}</p>
+											<span class="card-username red-text darken-1">#{post.user.name}</span>
+											<br></br>
+											<p class="title-post card-contenido">#{post.contenido}</p>
 										</div>
 									</div>
 								</div>
@@ -118,9 +228,9 @@
 								</div>
 
 								<div class="card-action">
-									<a style="cursor: pointer"
-										class="grey-text darken-2 activator">
+									<a style="cursor: pointer" class="grey-text darken-2 activator">
 										#{commentMb.getMessageFromTotalComments(post)} </a>
+									#{favoriteMb.getMessageFromTotalFavorites(post)}
 								</div>
 							</div>
 

@@ -15,6 +15,7 @@ import controller.ImagePostController;
 import controller.PostController;
 import model.ImagePost;
 import model.Post;
+import model.User;
 
 @Named
 @SessionScoped
@@ -36,13 +37,25 @@ public class PostMb implements Serializable {
 	private Part file;
 
 	String contenido;
+	
+	int statusFilter = 1;
 
 	public List<Post> getPosts() {
+		if(statusFilter==1) {
+			return pc.getPosts();
+		}else if(statusFilter==2){
+			return pc.getPostsByUser(authMb.getUser());
+		}
+		
 		return pc.getPosts();
 	}
 
 	public List<Post> getMyPosts() {
 		return pc.getPostsByUser(authMb.getUser());
+	}
+	
+	public List<Post> getPostsByUser(User user) {
+		return pc.getPostsByUser(user);
 	}
 
 	public void crearPost() {
@@ -62,8 +75,9 @@ public class PostMb implements Serializable {
 			} catch (Exception e){
 				e.printStackTrace();
 			}
-				
+			
 			pc.addPost(post);
+			contenido = "";
 		}
 		
 		contenido = null;
@@ -72,6 +86,11 @@ public class PostMb implements Serializable {
 	public void deletePost(Post post) {
 		pc.removePost(post);
 	}
+	
+	public void filtrarPost(){
+		
+	}
+	
 
 	public String getContenido() {
 		return contenido;
@@ -89,7 +108,14 @@ public class PostMb implements Serializable {
 		this.file = file;
 	}
 	
-	
+	public int getStatusFilter() {
+		return statusFilter;
+	}
+
+	public void setStatusFilter(int statusFilter) {
+		this.statusFilter = statusFilter;
+	}
+
 	public String getIsImage(Post post) {
 		
 		String isImage;

@@ -56,8 +56,14 @@
 
 				<div class="align-center">
 					<h:commandLink action="#{registerMb.register()}">
-						<button
-							class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
+						<div class="row">
+							<div class="col s7">
+								<button class="waves-effect red waves-light darken-1 btn-flat white-text">Registrarse</button>
+							</div>
+							<div class="col s5">
+								<h:link outcome="users" styleClass="btn-flat red-text">Inicia sesión</h:link>
+							</div>
+						</div>
 					</h:commandLink>
 				</div>
 			</h:form>

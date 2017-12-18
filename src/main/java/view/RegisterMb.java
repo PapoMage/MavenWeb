@@ -16,8 +16,6 @@ import controller.UserController;
 import model.ImageUser;
 import model.User;
 
-
-
 @Named
 @MultipartConfig(location="/tmp",
 fileSizeThreshold=1024*1024, 
@@ -38,6 +36,7 @@ public class RegisterMb implements Serializable {
 	private Part file;
 
 	public String register() {
+		
 
 		if (name.length() < 3) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -61,8 +60,11 @@ public class RegisterMb implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return "#";
 		}
-		
-		
+		if(userCntr.usernameExist(email)) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "El email ya existe", null);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return "#";
+		}
 		
 		ImageUser img;
 
@@ -72,12 +74,13 @@ public class RegisterMb implements Serializable {
 		user.setName(name);
 		user.setPassword(password);
 		user.setIs_admin(0);
+		
+		
 		try{
 			img = null;
 			if(file != null && file.getSize() > 0 && file.getContentType().startsWith("image/")){
 				img = imgCntl.upload(file);
 				user.setImage(img);
-				
 			}
 		} catch (Exception e){
 			e.printStackTrace();

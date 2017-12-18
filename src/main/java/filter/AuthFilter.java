@@ -23,8 +23,6 @@ public class AuthFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated metho d stub
-
 	}
 
 	@Override
@@ -40,12 +38,17 @@ public class AuthFilter implements Filter {
 				|| (request.getRequestURI().equals("/posts.xhtml") && !authMb.isLogged())
 				|| (request.getRequestURI().equals("/perfil.xhtml") && !authMb.isLogged())
 				|| (request.getRequestURI().equals("/comments.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/datos.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/likes.xhtml") && !authMb.isLogged())
+				|| (request.getRequestURI().equals("/seguidores.xhtml") && !authMb.isLogged())
 				|| (request.getRequestURI().equals("/users.xhtml") && !authMb.isLogged())) {
 			
 			response.sendRedirect("index.xhtml");
 		}
 		else if(request.getRequestURI().equals("/posts.xhtml") && authMb.getUser().getIs_admin() == 0
 				|| (request.getRequestURI().equals("/users.xhtml") && authMb.getUser().getIs_admin() == 0)
+				|| (request.getRequestURI().equals("/likes.xhtml") && authMb.getUser().getIs_admin() == 0)
+				|| (request.getRequestURI().equals("/seguidores.xhtml") && authMb.getUser().getIs_admin() == 0)
 				|| (request.getRequestURI().equals("/comments.xhtml") && authMb.getUser().getIs_admin() == 0)){
 			response.sendRedirect("home.xhtml");
 		}
@@ -57,8 +60,6 @@ public class AuthFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-
 	}
 
 }

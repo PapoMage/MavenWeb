@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/WEB-INF/templates/base.xhtml">
+
+		<ui:define name="title">Tech Blog - Datos</ui:define>
+
+		<ui:define name="content">
+
+		<ui:include src="/WEB-INF/templates/header.xhtml"/>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col s12 m6">
+					<div class="card">
+						<div class="card-image">
+						<img src="#{authMb.getSrcImage(authMb.user)}" class="img-responsive"></img>
+						</div>
+						<div class="card-content">
+						<strong>Seguidores: #{followerMb.getFollowersByUser(authMb.user)}</strong>
+						<br/><br/>
+						<p>
+							Username: #{authMb.user.name}
+							<br></br>
+							Email: #{authMb.user.email}
+							<br></br>
+							clave: **********
+						</p>
+						
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m6">
+					<h2 class="red-text text-darken-1">Modificar datos</h2>
+					<a href="#modalclave" onclick="openModal('clave')" class="waves-effect red btn">Cambiar clave
+						<i class="material-icons right">vpn_key</i>
+					</a>
+					<br></br><br></br>
+					<a href="#modalimage" onclick="openModal('image')" class="waves-effect red btn">Cambiar foto de perfil
+						<i class="material-icons right">image</i>
+					</a>
+				</div>
+
+				<div style="margin-left:15px;">
+					<br/><br/>
+					<h:messages globalOnly="true"/>
+				</div>
+			</div>
+		</div>
+
+		<div id="modalclave" style="height: 65%;overflow-y: hidden;" class="modal bottom-sheet">
+			<div class="modal-content">
+				<h4>Modificar clave</h4>
+				
+					<h:form>
+						<div class="row">
+							<div class="input-field col s8">
+								<h:inputText value="#{profileMb.pass1}" placeholder="1" id="pass1"></h:inputText>
+								<label for="pass1">Clave nueva</label>
+							</div>
+							<div class="input-field col s8">
+								<h:inputText value="#{profileMb.pass2}" placeholder="2" id="pass2"></h:inputText>
+								<label for="pass2">Repita clave</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s5">
+							</div>
+							<div class="col s3">
+								<a href="#!" class="modal-action modal-close waves-effect red-text waves-red btn-flat">
+									Cancelar
+								</a>
+								<h:commandLink style="display:inline" action="#{profileMb.changePassword()}" styleClass="modal-action waves-effect green-text waves-red btn-flat">
+									Confirmar
+								</h:commandLink>
+							</div>
+						</div>
+					</h:form>
+			</div>
+		</div>
+		<div id="modalimage" class="modal bottom-sheet">
+			<div class="modal-content">
+				<h4>Modificar imagen</h4>
+				<h:form enctype="multipart/form-data">
+
+					<div class="file-field input-field">
+						<div class="waves-effect red btn">
+							<span><i class="material-icons right">attach_file</i>
+							Foto de perfil</span>
+							<h:inputFile id="file" value="#{profileMb.file}"/>
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text" placeholder="Suba imagen de su historia"/>
+						</div>
+					</div>
+
+					<a href="#!" class="modal-action modal-close waves-effect red-text waves-red btn-flat">
+						Cancelar
+					</a>
+					<h:commandLink style="display:inline" action="#{profileMb.changeImage()}" styleClass="modal-action waves-effect green-text waves-red btn-flat">
+						Confirmar
+					</h:commandLink>
+
+				</h:form>
+			
+				
+				
+			</div>
+		</div>
+		
+		
+
+	    </ui:define>
+
+</ui:composition>
+
+</html>

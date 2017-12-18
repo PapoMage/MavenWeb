@@ -6,6 +6,11 @@
         <jta-data-source>java:openejb/Resource/MysqlDs</jta-data-source>
         <class>model.User</class>
         <class>model.Post</class>
+        <class>model.Comment</class>
+        <class>model.Favorite</class>
+        <class>model.Follower</class>
+        <class>model.ImagePost</class>
+        <class>model.ImageUser</class>
         <properties>
         	
 	            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
