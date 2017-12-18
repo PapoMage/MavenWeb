@@ -6,6 +6,8 @@
 Trabajo práctico del sexto cuatrimestre de la Escuela DaVinci desarrollado con *Maven*, *JSF* y un maquetado con *Materialize*.
 La pagina ofrece un sistema de *login*, *registro* y la posibilidad que los usuarios suban posts y puedan ver los que subieron.
 Todo esto se realiza mediante conexiones a una Base de datos *SQL* y con el modelo de la misma generada por *Entities*.
+Es una red social que cuenta con subida de posts con o sin imagenes, buscador de usuarios, actualizacion de perfil, seguir usuarios,
+agregar post favoritos, comentar posts, etc
 
 **Tecnologias usadas:**
 Maven, Tomee, Materialize y Java
