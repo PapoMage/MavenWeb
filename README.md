@@ -10,9 +10,9 @@ Todo esto se realiza mediante conexiones a una Base de datos *SQL* y con el mode
 **Tecnologias usadas:**
 Maven, Tomee, Materialize y Java
 
-Inicio:
+Login:
 
-![Image of inicio](src/main/webapp/images/Captura.JPG)
+![Image of inicio](src/main/webapp/images/Captura5.JPG)
 
 Lista de Usuarios:
 
