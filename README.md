@@ -1,4 +1,4 @@
-## Tech Blog
+﻿## Tech Blog
 
 ![Image of inicio](src/main/webapp/images/logo.png)
 
@@ -12,15 +12,41 @@ Maven, Tomee, Materialize y Java
 
 Login:
 
+<<<<<<< HEAD
+![Image of inicio](src/main/webapp/images/Captura1.JPG)
+
+
+
+Registro:
+
+![Image of inicio](src/main/webapp/images/Captura6.JPG)
+
+
+
+Home:
+
+![Image of inicio](src/main/webapp/images/Captura1.PNG)
+=======
 ![Image of inicio](src/main/webapp/images/Captura5.JPG)
+>>>>>>> 924e59ea39b045dcd83e64c2356721a28313f5c4
 
-Lista de Usuarios:
 
-![Image of inicio](src/main/webapp/images/Captura2.JPG)
 
 Comentarios:
 
-![Image of inicio](src/main/webapp/images/Captura3.JPG)
+![Image of inicio](src/main/webapp/images/Captura3.PNG)
+
+
+
+Perfil:
+
+![Image of inicio](src/main/webapp/images/Captura4.PNG)
+
+
+
+Menu:
+
+![Image of inicio](src/main/webapp/images/Captura2.PNG)
 
 **¿Como utilizo este proyecto?**
 Para que el proyecto se conecte con *Maven* y haga la conexion con la Base de datos es necesario seguir los siguientes pasos:
