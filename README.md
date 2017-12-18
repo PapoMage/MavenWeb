@@ -12,9 +12,7 @@ Maven, Tomee, Materialize y Java
 
 Login:
 
-<<<<<<< HEAD
-![Image of inicio](src/main/webapp/images/Captura1.JPG)
-
+![Image of inicio](src/main/webapp/images/Captura5.JPG)
 
 
 Registro:
@@ -26,9 +24,6 @@ Registro:
 Home:
 
 ![Image of inicio](src/main/webapp/images/Captura1.PNG)
-=======
-![Image of inicio](src/main/webapp/images/Captura5.JPG)
->>>>>>> 924e59ea39b045dcd83e64c2356721a28313f5c4
 
 
 
